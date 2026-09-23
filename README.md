@@ -49,6 +49,7 @@ use `<span data-full>` / `<span data-short>` for short portrait labels.
 ## Open items (client)
 - Real email (replace `hello@lamimeat.co.ug` via `NEXT_PUBLIC_EMAIL`)
 - Final logo (+ exact logo red to replace `#C8372D`) → `public/brand/`
-- Photos and Peridot font → `public/images/`, `public/fonts/`
+- Photos: in place. Still needed: a Beef Hot Dogs pack shot and a Lean Minced Beef pack shot (both use temporary copies, see `public/images/README.md`)
+- Peridot font → `public/fonts/`
 - Real copy: delivery areas, payments, minimum order, storage, jobs, recipes, ticker tips, Our Story, testimonials, rotating words
 - OG images for WhatsApp link previews
