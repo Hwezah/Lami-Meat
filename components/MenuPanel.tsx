@@ -93,11 +93,13 @@ export function MenuPanel() {
               </Link>
             ))}
           </nav>
-          <div className="mt-auto grid grid-cols-2 gap-x-3 gap-y-3.5 pt-7 font-mono text-xs tracking-[.06em] text-dark-muted">
-            <span>{site.location}</span>
-            <span>{site.phoneDisplay}</span>
-            <span className="[overflow-wrap:anywhere]">{site.email}</span>
-            <span>Mon–Sat · 8–6</span>
+          <div className="mt-auto flex flex-col items-center gap-2.5 pt-7 text-center font-mono text-xs tracking-[.06em] whitespace-nowrap text-dark-muted">
+            <span>
+              {site.location} · Mon–Sat · 8–6
+            </span>
+            <span>
+              {site.phoneDisplay} · {site.email}
+            </span>
           </div>
         </div>
       </div>
