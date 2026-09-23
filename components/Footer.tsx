@@ -43,8 +43,9 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap justify-between gap-x-[18px] gap-y-2.5 pt-[22px] font-mono text-[11.5px] tracking-[.06em] text-dark-faint mp:justify-center mp:text-center">
+        <div className="flex flex-wrap justify-center gap-x-[18px] gap-y-2.5 pt-[22px] text-center font-mono text-[11.5px] tracking-[.06em] text-dark-faint">
           <span>© {new Date().getFullYear()} LAMI MEAT Ltd · Kampala</span>
+          <span aria-hidden className="text-brass mp:hidden">·</span>
           <span>Crafted for the finest taste</span>
         </div>
       </div>

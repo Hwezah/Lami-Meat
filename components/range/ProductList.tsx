@@ -36,27 +36,50 @@ function ProductArticle({ p }: { p: Product }) {
             </div>
           ))}
         </dl>
-        <div className="mt-6 flex flex-wrap gap-2 mp:justify-center" role="group" aria-label="Pack size">
-          {SIZES.map((s) => (
-            <button key={s} type="button" onClick={() => setSize(s)} aria-pressed={size === s} className={chip(size === s)}>
-              {s} · {ugx(priceOf(p, s))}
+        {/* Purchase: size + qty → one total → two actions */}
+        <div className="mt-7 w-full max-w-[480px] text-left mp:mx-auto mp:w-[80vw]">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="inline-flex rounded-lm border border-ink/30 p-[1px]" role="group" aria-label="Pack size">
+              {SIZES.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setSize(s)}
+                  aria-pressed={size === s}
+                  className={`min-h-11 min-w-[64px] rounded-[1px] px-4 font-display text-[13px] font-bold tracking-[.06em] uppercase transition-colors ${size === s ? "bg-ink text-bone" : "text-ink hover:bg-ink/6"}`}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+            <div className="text-ink">
+              <QtyStepper value={qty} onChange={setQty} />
+            </div>
+          </div>
+
+          <div className="mt-4 flex items-baseline justify-between gap-3 border-t border-ink/18 pt-4">
+            <span className="font-mono text-[11px] tracking-[.14em] text-bone-muted uppercase">
+              {qty} × {size}
+            </span>
+            <span className="text-[clamp(22px,2vw,26px)] font-extrabold tracking-[-0.01em] text-ink" aria-live="polite">
+              {ugx(total)}
+            </span>
+          </div>
+
+          <div data-cta-actions className="mt-4 flex gap-2.5 [&>*]:flex-1">
+            <button type="button" onClick={() => addToCart(p.name, size, qty)} className={cta.ink}>
+              Add to cart
             </button>
-          ))}
-        </div>
-        <div className="mt-3 flex flex-wrap items-center gap-2.5 text-ink mp:justify-center">
-          <QtyStepper value={qty} onChange={setQty} />
-          <button type="button" onClick={() => addToCart(p.name, size, qty)} className={cta.ink}>
-            Add — {ugx(total)}
-          </button>
-          <a
-            href={wa(`Hi LAMI MEAT! I'd like to order ${qty} × ${p.name} (${size}, ${ugx(total)}).`)}
-            target="_blank"
-            rel="noopener"
-            aria-label="Order on WhatsApp"
-            className="flex size-12 items-center justify-center rounded-lm border border-whatsapp text-whatsapp-hover hover:bg-whatsapp hover:text-white"
-          >
-            <WhatsAppIcon />
-          </a>
+            <a
+              href={wa(`Hi LAMI MEAT! I'd like to order ${qty} × ${p.name} (${size}, ${ugx(total)}).`)}
+              target="_blank"
+              rel="noopener"
+              className={`${cta.outlineInk} !border-whatsapp !text-whatsapp-hover hover:!bg-whatsapp hover:!text-white`}
+            >
+              <WhatsAppIcon />
+              WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </article>

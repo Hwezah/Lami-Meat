@@ -58,11 +58,7 @@ export function MenuPanel() {
             <span className="text-brass">message.</span>
           </h2>
           <p className="mt-4 max-w-[360px] text-[15.5px] leading-[1.6] text-dark-body">Tell us what you need. We confirm price and delivery time on WhatsApp — usually within the hour.</p>
-          <a href={waDefault()} target="_blank" rel="noopener" className="mt-6 flex min-h-[52px] items-center justify-center gap-2.5 rounded-lm bg-whatsapp px-[22px] py-[15px] text-sm font-extrabold tracking-[.06em] whitespace-nowrap text-white uppercase hover:bg-whatsapp-hover">
-            <WhatsAppIcon />
-            WhatsApp {site.phoneDisplay}
-          </a>
-          <div className="mt-7 border-t border-bone/14">
+          <div className="mt-6 border-t border-bone/14">
             {rows.map(([label, value]) => (
               <div key={label} className="grid grid-cols-[96px_1fr] items-baseline gap-3.5 border-b border-bone/12 py-[13px]">
                 <span className={rowLabel}>{label}</span>
@@ -70,6 +66,10 @@ export function MenuPanel() {
               </div>
             ))}
           </div>
+          <a href={waDefault()} target="_blank" rel="noopener" className="mt-7 flex min-h-[52px] items-center justify-center gap-2.5 rounded-lm bg-whatsapp px-[22px] py-[15px] text-sm font-extrabold tracking-[.06em] whitespace-nowrap text-white uppercase hover:bg-whatsapp-hover">
+            <WhatsAppIcon />
+            WhatsApp {site.phoneDisplay}
+          </a>
           <div className="mt-auto hidden pt-7 max-lg:block">
             <div className={`${rowLabel} mb-3`}>Pages</div>
             <div className="flex flex-wrap gap-x-[18px] gap-y-1">
