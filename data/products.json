@@ -1,0 +1,14 @@
+[
+  { "id": "smoked-sausages", "num": "01", "kind": "Smoked", "name": "Smoked Beef Sausages", "p500": 15000, "p1k": 30000, "img": "/images/pack-hotdog.jpg",
+    "desc": "Pure beef, seasoned with our house spice, filled by hand and hung over a wood fire until deep amber. Fully smoked — warm through on the pan or grill.",
+    "specs": [["Storage", "Frozen, −18°C"], ["To cook", "Pan or grill, 8–10 min"], ["Keeps", "3 months frozen"], ["Pack", "Vacuum-sealed"]] },
+  { "id": "hot-dogs", "num": "02", "kind": "Smoked", "name": "Beef Hot Dogs", "p500": 15000, "p1k": 30000, "img": "/images/pack-hotdog-2.jpg",
+    "desc": "Long, juicy and fully smoked. Simmer or grill for a few minutes and they’re ready for the bun.",
+    "specs": [["Storage", "Frozen, −18°C"], ["To cook", "Simmer or grill, 5 min"], ["Keeps", "3 months frozen"], ["Pack", "Vacuum-sealed"]] },
+  { "id": "minced-beef", "num": "03", "kind": "Fresh", "name": "Minced Beef", "p500": 12000, "p1k": 24000, "img": "/images/minced-500.jpg",
+    "desc": "100% beef, minced the same morning it’s packed. For sauces, burgers, samosas and stews.",
+    "specs": [["Storage", "Chilled 0–4°C or frozen"], ["To cook", "Brown well, 8–10 min"], ["Keeps", "2 days chilled · 3 months frozen"], ["Pack", "Sealed tray"]] },
+  { "id": "lean-minced-beef", "num": "04", "kind": "Fresh", "name": "Lean Minced Beef", "p500": 14000, "p1k": 28000, "img": "/images/minced-500-b.jpg",
+    "desc": "An extra-lean cut, trimmed before mincing, for lighter family meals and less fat in the pan.",
+    "specs": [["Storage", "Chilled 0–4°C or frozen"], ["To cook", "Brown well, 8–10 min"], ["Keeps", "2 days chilled · 3 months frozen"], ["Pack", "Sealed tray"]] }
+]

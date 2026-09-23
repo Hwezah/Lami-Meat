@@ -1,0 +1,54 @@
+# LAMI MEAT
+
+Marketing and ordering site for LAMI MEAT, a smokehouse and butchery in Kampala.
+Four beef products, 500g / 1kg packs. No online payment: orders go out as a pre-filled **WhatsApp** message.
+
+## Stack
+- **Next.js 15** (App Router) + **TypeScript** + **React 19**
+- **Tailwind CSS v4**: design tokens in `@theme` (`app/globals.css`)
+- **Zustand**: cart (persisted to `localStorage["lm-box"]`), UI overlays, auth stub
+- `next/font` (Hanken Grotesk, Space Mono, Anton) + Peridot PE via `@font-face`
+- `next/image` for all photos
+
+## Getting started
+```bash
+cp .env.example .env.local
+npm install
+npm run dev        # http://localhost:3000
+npm run lint && npm run typecheck && npm run build
+```
+
+## Structure
+```
+app/            routes: / · /range · /our-story · /contact · /cart · /recipes · /careers · /account
+                + robots.ts, sitemap.ts, LocalBusiness JSON-LD in layout.tsx
+components/     chrome (TopBar, Nav, MenuPanel, SearchSheet, Toast, Footer, AuthModal)
+                + shared UI (Button, Eyebrow, PageHeader, Fold, QtyStepper, Photo, RangeRow, RotatingWord, Ticker, Reveal)
+lib/            config, whatsapp (wa.me builder), format (UGX), cart store, session stub, ui store
+data/           products.json (canonical), nav, home copy, tips, roles
+design/         the 8 .dc.html design references (open with `npx serve design`) — reference only, not shipped
+docs/           HANDOFF.md (build spec), WIRING.md (behaviour; wins over HANDOFF), COMMAND-LOG.md
+public/         images/ (client photos), brand/ (logos), fonts/
+```
+
+## Responsive contract
+Breakpoints are **max-width** in the design → use Tailwind `max-*` variants:
+`max-xl` ≤1060 · `max-lg` ≤920 · `max-md` ≤760 · `max-sm` ≤620 · `max-xs` ≤480.
+Mobile portrait `(max-width:600px) and (orientation:portrait)` → the custom `mp:` variant.
+Button rows marked `data-cta-actions` get the 80vw / 2-up / no-wrap treatment automatically;
+use `<span data-full>` / `<span data-short>` for short portrait labels.
+
+## Status
+| Page | State |
+|---|---|
+| Home | Built (all sections, newsletter, rotating word) |
+| The Range | Header, filters, product articles with size/qty/add/WhatsApp. Wholesale split + care steps to do |
+| Cart | Lines, steppers, summary, WhatsApp checkout. Extras list to do |
+| Our Story, Contact, Recipes, Careers, Account | Header only (+ Recipes ticker). Sections listed on each page |
+
+## Open items (client)
+- Real email (replace `hello@lamimeat.co.ug` via `NEXT_PUBLIC_EMAIL`)
+- Final logo (+ exact logo red to replace `#C8372D`) → `public/brand/`
+- Photos and Peridot font → `public/images/`, `public/fonts/`
+- Real copy: delivery areas, payments, minimum order, storage, jobs, recipes, ticker tips, Our Story, testimonials, rotating words
+- OG images for WhatsApp link previews

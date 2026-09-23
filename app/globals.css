@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+/*
+  LAMI MEAT design tokens. Source of truth: docs/HANDOFF.md → "Design tokens".
+  Breakpoints are max-width in the design, so use Tailwind's `max-*` variants:
+    max-xl → ≤1060 · max-lg → ≤920 · max-md → ≤760 · max-sm → ≤620 · max-xs → ≤480
+  Mobile portrait = `mp:` → (max-width:600px) and (orientation:portrait).
+*/
+@custom-variant mp (@media (max-width: 600px) and (orientation: portrait));
+
+@theme {
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 620px;
+  --breakpoint-md: 760px;
+  --breakpoint-lg: 920px;
+  --breakpoint-xl: 1060px;
+
+  --color-charcoal: #16171a;
+  --color-charcoal-2: #202226;
+  --color-hero: #0e1316;
+  --color-footer: #0f1012;
+  --color-bone: #efe9df;
+  --color-bone-2: #e4dccf;
+  --color-brass: #b8955a;
+  --color-brass-hover: #d2b27a;
+  --color-brass-deep: #7d5e2a;
+  --color-brass-deep-2: #8a6a33;
+  --color-dark-body: #bdb6aa;
+  --color-dark-muted: #9c958a;
+  --color-dark-faint: #7c766c;
+  --color-bone-body: #4a4640;
+  --color-bone-muted: #6e685f;
+  --color-ink: #16171a;
+  --color-whatsapp: #1fa855;
+  --color-whatsapp-hover: #178f47;
+  --color-error-dark: #e3a27a;
+  --color-error-bone: #9a3a26;
+  --color-signal-red: #c8372d;
+  --color-online: #7be38b;
+
+  --font-body: var(--font-peridot), var(--font-hanken), system-ui, sans-serif;
+  --font-display: var(--font-hanken), sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+  --font-numeral: var(--font-anton), sans-serif;
+
+  --radius-lm: 2px;
+  --ease-lm: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-word-in: word-in 0.7s var(--ease-lm) both;
+  --animate-rise: rise 60s linear infinite;
+
+  @keyframes word-in {
+    from { opacity: 0; transform: translateY(0.35em); filter: blur(6px); }
+    to { opacity: 1; transform: none; filter: none; }
+  }
+  @keyframes rise {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
+}
+
+/* Peridot PE (body face). Drop peridot-pe-variable.otf into public/fonts/;
+   until then the stack falls back to Hanken Grotesk. */
+@font-face {
+  font-family: "Peridot PE";
+  src: url("/fonts/peridot-pe-variable.otf") format("opentype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --font-peridot: "Peridot PE";
+}
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    overflow-x: clip;
+  }
+  body {
+    background: var(--color-charcoal);
+    color: var(--color-bone);
+    font-family: var(--font-body);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-brass);
+    color: var(--color-charcoal);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  /* Section shell: padding clamp(72,9vw,128) × clamp(18,4vw,46), content max 1320 */
+  .lm-section {
+    padding: clamp(72px, 9vw, 128px) clamp(18px, 4vw, 46px);
+  }
+  .lm-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  @media (max-width: 760px) {
+    .lm-section {
+      padding-top: clamp(64px, 14vw, 96px);
+      padding-bottom: clamp(64px, 14vw, 96px);
+    }
+  }
+  @media (max-width: 480px) {
+    .lm-section {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+  @media (max-width: 600px) and (orientation: portrait) {
+    .lm-section {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+  }
+
+  .lm-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .lm-h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.045em;
+    line-height: 0.88;
+    font-size: clamp(50px, 7.4vw, 124px);
+  }
+  .lm-h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    font-size: clamp(38px, 4.8vw, 72px);
+  }
+
+  /* Button row contract on mobile portrait: centred, 80vw, 2-up flex, no wrap. */
+  @media (max-width: 600px) and (orientation: portrait) {
+    [data-cta-actions] {
+      display: flex !important;
+      width: 80vw !important;
+      max-width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      margin-top: clamp(34px, 9vw, 44px) !important;
+      justify-content: space-between !important;
+      flex-wrap: nowrap !important;
+      gap: 10px !important;
+    }
+    [data-cta-actions] > :is(a, button) {
+      flex: 1 1 0 !important;
+      min-width: 0 !important;
+      justify-content: center !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      font-size: 13px !important;
+      letter-spacing: 0.04em !important;
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+    }
+  }
+}
+
+/* Short/long label pairs: <span data-full>…</span><span data-short>…</span> */
+[data-short] {
+  display: none;
+}
+@media (max-width: 600px) and (orientation: portrait) {
+  [data-cta-actions] [data-full] {
+    display: none;
+  }
+  [data-cta-actions] [data-short] {
+    display: inline;
+    text-transform: uppercase;
+  }
+}
+
+/* Reveal-on-scroll (see components/Reveal.tsx) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+[data-reveal][data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-word-in,
+  .animate-rise {
+    animation: none !important;
+  }
+}

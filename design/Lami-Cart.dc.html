@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Your Cart — LAMI MEAT</title>
+<meta name="description" content="Review your LAMI MEAT order and send it on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="lm-auth.js"></script>
+<style>
+  @font-face{font-family:'Peridot PE';src:url('uploads/peridot-pe-variable.otf') format('opentype');font-weight:100 900;font-style:normal;font-display:swap;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:#16171A;}
+  ::selection{background:#B8955A;color:#16171A;}
+  a{color:#B8955A;text-decoration:none;}
+  a:hover{color:#D2B27A;}
+  #lm-menu{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s;}
+  #lm-menu[data-open="true"]{opacity:1;visibility:visible;pointer-events:auto;}
+  #lm-search{opacity:0;visibility:hidden;pointer-events:none;}
+  #lm-search[data-open="true"]{opacity:1;visibility:visible;pointer-events:auto;}
+  #lm-search [data-search-sheet]{transform:translateY(-100%);transition:transform .6s cubic-bezier(.16,1,.3,1);}
+  #lm-search[data-open="true"] [data-search-sheet]{transform:translateY(0);}
+  #lm-search input::placeholder{color:#7C766C;}
+  #lm-home a[data-btn],#lm-home button{white-space:nowrap;}
+  #lm-home#lm-home [data-rsp="fold-head"]{white-space:normal;}
+  #lm-home [data-rsp="fold-head"] *{min-width:0;}
+  #lm-home [data-range-row]:hover [data-range-name]{color:#8A6A33;}
+
+  @media (max-width:1060px){
+    [data-rsp="cards-3"]{grid-template-columns:repeat(2,1fr)!important;}
+  }
+  @media (max-width:920px){
+    [data-rsp="nav-links"]{display:none!important;}
+    #lm-nav-logo{height:40px!important;}
+    #lm-home [data-rsp="nav-logo"]{position:static!important;transform:none!important;}
+    [data-rsp="split"]{grid-template-columns:1fr!important;}
+    [data-rsp="ledger"]{grid-template-columns:1fr 1fr!important;}
+    [data-rsp="footer-grid"]{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:26px 18px!important;}
+    #lm-home footer [data-foot-logo]{grid-column:1 / -1;}
+  }
+  @media (max-width:760px){
+    [data-rsp="nav-cta"]{display:none!important;}
+    section[data-screen-label]{padding-top:clamp(64px,14vw,96px)!important;padding-bottom:clamp(64px,14vw,96px)!important;}
+    [data-rsp="cards-3"]{grid-template-columns:1fr!important;row-gap:clamp(24px,7vw,40px)!important;}
+    [data-rsp="range-row"]{grid-template-columns:44px 88px 1fr!important;row-gap:14px!important;}
+    [data-rsp="range-row"] [data-range-deal]{grid-column:3 / -1;align-items:flex-start!important;}
+    [data-rsp="range-row"] [data-range-buy]{justify-content:flex-start!important;}
+    [data-rsp="range-row"] [data-range-price]{text-align:left!important;}
+    #lm-home [data-hero]{align-items:flex-end!important;min-height:0!important;padding-top:clamp(250px,66vw,440px)!important;padding-bottom:clamp(44px,10vw,64px)!important;}
+    #lm-home [data-hero-img]{width:100%!important;height:clamp(300px,82vw,520px)!important;}
+    #lm-home [data-hero-fade]{background:linear-gradient(180deg,rgba(14,19,22,0) 0%,rgba(14,19,22,0.1) 30%,#0E1316 clamp(300px,82vw,520px))!important;}
+    #lm-home [data-hero-cap]{display:none!important;}
+  }
+  @media (max-width:620px){
+    [data-rsp="ledger"]{grid-template-columns:1fr!important;}
+    [data-rsp="footer-grid"]{grid-template-columns:1fr!important;}
+  }
+  @media (max-width:480px){
+    section[data-screen-label],header[data-screen-label]{padding-left:24px!important;padding-right:24px!important;}
+    [data-rsp="range-row"]{grid-template-columns:34px 72px 1fr!important;}
+    [data-rsp="range-row"] [data-range-deal]{grid-column:1 / -1!important;align-items:stretch!important;}
+    [data-rsp="range-row"] [data-range-buy] > *{flex:1 1 0;}
+  }
+  #lm-home > header[data-screen-label="Hero"]{padding-left:0!important;padding-right:0!important;}
+  @media (max-width:600px) and (orientation:portrait){
+    #lm-home section h1,#lm-home section h2,#lm-home header h1,#lm-home header h2{text-align:center!important;}
+    #lm-home [data-eyebrow]{text-align:center!important;justify-content:center!important;width:100%;}
+    #lm-home section p[style*="max-width"],#lm-home header p[style*="max-width"]{text-align:center!important;margin-left:auto!important;margin-right:auto!important;}
+    #lm-home [data-cta-actions],#lm-home [data-mob-center-row]{justify-content:center!important;width:100%;}
+    #lm-home [data-mob-center-col]{align-items:center!important;text-align:center!important;}
+    #lm-home > section,#lm-home > header:not([data-screen-label="Hero"]){padding-left:14px!important;padding-right:14px!important;}
+    #lm-home [data-hero]{padding-left:14px!important;padding-right:14px!important;}
+    #lm-home [data-rsp="split"]{row-gap:clamp(44px,11vw,72px)!important;}
+    #lm-home [data-rsp="ledger"] > *{text-align:center;}
+    #lm-home [data-quote]{text-align:center;}
+    #lm-home [data-cta-card]{padding-left:22px!important;padding-right:22px!important;}
+    #lm-home footer [data-rsp="footer-grid"]{grid-template-columns:1fr!important;gap:30px!important;}
+    #lm-home footer [data-foot-logo]{align-items:center!important;text-align:center;}
+    #lm-home footer [data-foot-col] > div:first-child{text-align:center!important;}
+    #lm-home footer [data-foot-links]{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:12px 6px!important;text-align:center;}
+    #lm-home footer [data-foot-links] a{font-size:12.5px!important;overflow-wrap:anywhere;}
+    #lm-home footer [data-foot-contact]{grid-template-columns:repeat(2,1fr)!important;}
+    #lm-home footer [data-foot-bar]{justify-content:center!important;text-align:center;}
+    #lm-home [data-newsletter-form]{flex-direction:column!important;align-items:center!important;gap:10px!important;}
+    #lm-home [data-newsletter-form] input{width:100%!important;text-align:center!important;}
+    #lm-home [data-newsletter-form] button{width:70%!important;justify-content:center!important;}
+    #lm-home [data-newsletter-note]{text-align:center!important;}
+    #lm-home [data-menu-meta]{display:grid!important;grid-template-columns:1fr 1fr!important;gap:14px 12px!important;}
+    #lm-home [data-menu-panel]{padding:20px!important;}
+    #lm-home [data-toast-wrap]{left:16px!important;right:16px!important;transform:none!important;}
+    #lm-home [data-toast-inner]{flex-direction:column!important;align-items:stretch!important;text-align:center;}
+  }
+
+  #lm-home [data-chip][data-on="true"],#lm-home [data-size][data-on="true"]{background:#16171A!important;color:#EFE9DF!important;border-color:#16171A!important;}
+  #lm-home [data-tab][data-on="true"]{color:#EFE9DF!important;border-color:#B8955A!important;}
+  #lm-home [data-field]:focus{outline:none;border-color:#B8955A!important;}
+  #lm-home [data-field-bone]:focus{outline:none;border-color:#16171A!important;}
+  #lm-home [data-field]::placeholder{color:#7C766C;}
+  #lm-home [data-field-bone]::placeholder{color:#8F887D;}
+  #lm-home select[data-field] option{color:#16171A;}
+  #lm-home [data-fold][data-open="false"] [data-fold-body]{display:none;}
+  #lm-home [data-fold][data-open="true"] [data-fold-plus]{transform:rotate(45deg);}
+  @media (max-width:1180px){
+    [data-rsp="cart-line"]{grid-template-columns:72px 1fr auto!important;}
+    [data-cl="img"]{grid-row:1 / 3;} [data-cl="step"]{grid-column:2;grid-row:2;} [data-cl="total"]{grid-column:3;grid-row:2;align-self:center;} [data-cl="rm"]{grid-column:3;grid-row:1;justify-self:end;}
+  }
+  @media (max-width:1060px){ [data-rsp="ledger4"]{grid-template-columns:repeat(2,1fr)!important;} }
+  @media (max-width:920px){
+    [data-rsp="chapter"]{grid-template-columns:1fr 1fr!important;}
+    [data-rsp="chapter"] > :first-child{grid-column:1 / -1;}
+    [data-rsp="sticky"]{position:static!important;}
+    [data-rsp="mosaic"]{grid-template-columns:repeat(2,1fr)!important;}
+    [data-rsp="mosaic"] [data-big]{grid-column:1 / -1!important;grid-row:auto!important;aspect-ratio:16/10!important;}
+  }
+  @media (max-width:620px){
+    [data-rsp="chapter"],[data-rsp="ledger4"],[data-rsp="form-2"],[data-rsp="fold-cols"]{grid-template-columns:1fr!important;}
+    [data-rsp="contact-row"]{grid-template-columns:1fr!important;gap:4px!important;}
+    [data-rsp="fold-head"]{grid-template-columns:36px minmax(0,1fr) 44px!important;}
+    [data-rsp="fold-head"] > span{min-width:0;overflow-wrap:anywhere;}
+    [data-rsp="fold-head"] [data-fold-meta]{grid-column:2;grid-row:2;}
+    [data-rsp="fold-head"] [data-fold-plus]{grid-column:3;grid-row:1 / 3;}
+    [data-rsp="spec"]{grid-template-columns:1fr 1fr!important;}
+  }
+  @media (max-width:600px) and (orientation:portrait){
+    #lm-home [data-rsp="ledger4"] > *{text-align:center;}
+    #lm-home [data-rsp="contact-row"]{text-align:center;}
+  }
+
+  /* mobile portrait: centre everything except lists, steps, boxes & structured rows */
+  @media (max-width:600px) and (orientation:portrait){
+    #lm-home > section,#lm-home > header{text-align:center;}
+    #lm-home > section p,#lm-home > header p{margin-left:auto;margin-right:auto;}
+    #lm-home > section figcaption{justify-content:center!important;text-align:center;}
+    #lm-home :is(ul,ol,li,dl,label,[data-steps],[data-form],[data-fold],[data-rsp="range-row"],[data-rsp="cart-line"],[data-rsp="contact-row"],[data-rsp="ledger4"],aside,p[data-quote]),#lm-home :is(ul,ol,li,dl,label,[data-steps],[data-form],[data-fold],[data-rsp="range-row"],[data-rsp="cart-line"],[data-rsp="contact-row"],[data-rsp="ledger4"],aside,p[data-quote]) :is(h1,h2,h3,p,div,span,[data-eyebrow]){text-align:left!important;}
+    #lm-home :is(ul,ol,li,dl,label,[data-steps],[data-form],[data-fold],[data-rsp="range-row"],[data-rsp="cart-line"],[data-rsp="contact-row"],[data-rsp="ledger4"],aside,p[data-quote]) p{margin-left:0!important;margin-right:0!important;}
+    #lm-home :is(ul,ol,li,dl,label,[data-steps],[data-form],[data-fold],[data-rsp="range-row"],[data-rsp="cart-line"],[data-rsp="contact-row"],[data-rsp="ledger4"],aside,p[data-quote]) :is([data-cta-actions],[data-mob-center-row],[data-eyebrow]){justify-content:flex-start!important;}
+    #lm-home :is(ul,ol,li,dl,label,[data-steps],[data-form],[data-fold],[data-rsp="range-row"],[data-rsp="cart-line"],[data-rsp="contact-row"],[data-rsp="ledger4"],aside,p[data-quote]) [data-mob-center-col]{align-items:flex-start!important;}
+    #lm-home [data-cta-card] [data-newsletter-form]{align-items:stretch!important;}
+    #lm-home [data-cta-card] [data-newsletter-form] input{text-align:center!important;}
+    #lm-home [data-cta-card] [data-newsletter-form] button{width:auto!important;align-self:flex-start;}
+    #lm-home [data-cta-card] [data-newsletter-note]{text-align:center!important;}
+    #lm-home :is(ul,ol,li,dl,label,[data-steps],[data-form],[data-fold],[data-rsp="range-row"],[data-rsp="cart-line"],[data-rsp="contact-row"],[data-rsp="ledger4"],aside,p[data-quote]) [data-cl="total"]{text-align:right!important;}
+    #lm-home [data-fold-body]{padding-left:0!important;}
+    #lm-home#lm-home [data-cta-actions]{display:flex!important;width:80vw!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;justify-content:space-between!important;flex-wrap:nowrap!important;gap:10px!important;}
+    #lm-home#lm-home [data-cta-actions] > :is(a,button){flex:1 1 0!important;min-width:0!important;width:auto!important;justify-content:center!important;text-align:center!important;padding-left:12px!important;padding-right:12px!important;white-space:normal!important;}
+    #lm-home :is([aria-label="Search"],[data-gm-account],[aria-label="Cart"]) > svg{width:24px!important;height:24px!important;}
+    #lm-home [data-cta-card]{text-align:center!important;}
+    #lm-home [data-cta-card] input{text-align:center!important;}
+    #lm-home [data-cta-card] :is([data-cta-actions],form,[data-mob-center-row]){justify-content:center!important;}
+    #lm-home#lm-home [data-cta-actions]{margin-top:clamp(34px,9vw,44px)!important;}
+    #lm-home#lm-home [data-cta-actions] > :is(a,button){white-space:nowrap!important;font-size:13px!important;letter-spacing:.04em!important;gap:8px!important;padding-left:10px!important;padding-right:10px!important;}
+    #lm-home#lm-home [data-cta-actions] [data-full]{display:none!important;}
+    #lm-home#lm-home [data-cta-actions] [data-short]{display:inline!important;text-transform:uppercase;}
+    #lm-home#lm-home aside a[target="_blank"]{display:flex!important;width:80vw!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;justify-content:center!important;}
+    #lm-home#lm-home [data-cta-card] [data-newsletter-form] button{width:80vw!important;max-width:100%!important;align-self:center!important;justify-content:center!important;}
+  }
+
+  #lm-home [data-short]{display:none;}
+  #lm-home [data-menu-main]{display:none!important;}
+  @media (max-width:920px){ #lm-home [data-menu-pages]{display:block!important;} }
+  @media (max-width:600px) and (orientation:portrait){
+    #lm-home [data-menu-main]{display:flex!important;}
+    #lm-home [data-menu-alt]{display:none!important;}
+    #lm-home [data-burger]{width:44px!important;height:44px!important;border:none!important;border-radius:0!important;}
+    #lm-home [data-burger] [data-three]{display:block!important;}
+    #lm-home [data-burger] [data-stripes]{display:none!important;}
+    #lm-home [data-burger] [data-round]{display:none!important;}
+  }
+</style>
+</helmet>
+<div id="lm-home" style="font-family:'Peridot PE','Hanken Grotesk',system-ui,sans-serif;color:#EFE9DF;background:#16171A;overflow-x:clip;-webkit-font-smoothing:antialiased;">
+
+  <div data-screen-label="Topbar" style="display:flex;justify-content:center;gap:10px 28px;flex-wrap:wrap;padding:9px 18px;border-bottom:1px solid rgba(239,233,223,0.1);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#B8955A;text-align:center;">
+    <span>Smokehouse &amp; butchery · Kampala</span><span data-rsp="nav-cta">Cold delivery Mon–Sat</span>
+  </div>
+
+  <nav id="lm-nav" data-screen-label="Nav" style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px clamp(18px,4vw,46px);background:rgba(22,23,26,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(239,233,223,0.1);">
+    <div data-rsp="nav-links" style="display:flex;align-items:center;gap:clamp(18px,2.4vw,36px);flex:1;min-width:0;">
+      <a href="Lami-Home.dc.html" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#EFE9DF;white-space:nowrap;" style-hover="color:#B8955A;">Home</a>
+      <a href="Lami-Products.dc.html" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#EFE9DF;white-space:nowrap;" style-hover="color:#B8955A;">The Range</a>
+      <a href="Lami-About.dc.html" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#EFE9DF;white-space:nowrap;" style-hover="color:#B8955A;">Our Story</a>
+      <a href="Lami-Order.dc.html" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#EFE9DF;white-space:nowrap;" style-hover="color:#B8955A;">Contact</a>
+    </div>
+    <a href="Lami-Home.dc.html" data-rsp="nav-logo" aria-label="LAMI MEAT home" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;">
+      <img id="lm-nav-logo" src="uploads/lami-nav-cream.svg" alt="LAMI MEAT" style="height:46px;width:auto;display:block;">
+    </a>
+    <div style="display:flex;align-items:center;justify-content:flex-end;gap:clamp(6px,1.1vw,14px);flex:1;min-width:0;">
+      <button onClick="{{ openSearch }}" aria-label="Search" style="background:none;border:none;cursor:pointer;color:#EFE9DF;display:flex;padding:6px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg></button>
+      <button data-gm-account aria-label="Account" style="background:none;border:none;cursor:pointer;color:#EFE9DF;display:flex;padding:6px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></button>
+      <a aria-label="Cart" href="Lami-Cart.dc.html" style="color:#EFE9DF;display:flex;padding:6px;position:relative;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.4 12.4a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.2L22 7H6"></path></svg><sc-if value="{{ cartShow }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-1px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#B8955A;color:#16171A;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;line-height:18px;text-align:center;">{{ cartCount }}</span></sc-if></a>
+      <a data-btn href="{{ waMain }}" target="_blank" rel="noopener" data-rsp="nav-cta" style="display:inline-flex;align-items:center;margin-left:4px;padding:11px 18px;border:1px solid #B8955A;color:#B8955A;border-radius:2px;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;" style-hover="background:#B8955A;color:#16171A;">Order</a>
+      <button data-burger onClick="{{ openMenu }}" aria-label="Contact &amp; menu" style="background:none;border:none;color:#EFE9DF;cursor:pointer;width:52px;height:44px;padding:0;display:flex;align-items:center;justify-content:center;flex-shrink:0;" style-hover="color:#B8955A;"><svg data-stripes width="38" height="14" viewBox="0 0 38 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 2h36M1 12h36"></path></svg><svg data-round width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="display:none;"><path d="M4 8h16M4 16h16"></path></svg><svg data-three width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" style="display:none;"><path d="M5 2.5v19M12 2.5v19M19 2.5v19"></path></svg></button>
+    </div>
+  </nav>
+
+  <div id="lm-search" data-open="{{ searchOpen }}" style="position:fixed;inset:0;z-index:70;">
+    <div onClick="{{ closeSearch }}" style="position:absolute;inset:0;background:rgba(0,0,0,0.5);"></div>
+    <div data-search-sheet style="position:absolute;top:0;left:0;right:0;background:#EFE9DF;color:#16171A;padding:clamp(34px,6vh,64px) clamp(18px,4vw,46px);">
+      <div style="max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:20px;border-bottom:1.5px solid #16171A;">
+        <input data-search-input type="text" placeholder="Search the range…" style="flex:1;min-width:0;background:none;border:none;padding:10px 2px;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:clamp(26px,3.4vw,44px);color:#16171A;outline:none;">
+        <button onClick="{{ closeSearch }}" aria-label="Close search" style="width:52px;height:52px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#16171A;flex-shrink:0;"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
+      <div style="max-width:1180px;margin:20px auto 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+        <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6E685F;margin-right:6px;">Popular</span>
+        <a href="Lami-Products.dc.html" style="padding:8px 14px;border:1px solid rgba(22,23,26,0.2);border-radius:2px;font-size:13.5px;color:#16171A;white-space:nowrap;">Smoked sausages</a>
+        <a href="Lami-Products.dc.html" style="padding:8px 14px;border:1px solid rgba(22,23,26,0.2);border-radius:2px;font-size:13.5px;color:#16171A;white-space:nowrap;">Beef hot dogs</a>
+        <a href="Lami-Products.dc.html" style="padding:8px 14px;border:1px solid rgba(22,23,26,0.2);border-radius:2px;font-size:13.5px;color:#16171A;white-space:nowrap;">Minced beef</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="lm-menu" data-open="{{ menuOpen }}" style="position:fixed;inset:0;z-index:60;">
+    <div onClick="{{ closeMenu }}" style="position:absolute;inset:0;background:rgba(0,0,0,0.55);"></div>
+    <div data-menu-panel style="position:absolute;top:0;right:0;bottom:0;width:min(500px,100%);background:#202226;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;overflow-y:auto;">
+      <button onClick="{{ closeMenu }}" aria-label="Close menu" style="position:absolute;top:18px;right:18px;width:52px;height:52px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#EFE9DF;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<div data-menu-alt style="display:flex;flex-direction:column;flex:1;min-height:0;">
+        <div style="font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:#B8955A;">Get in touch</div>
+        <h2 style="margin:clamp(28px,5vh,52px) 0 0;font-family:'Hanken Grotesk',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.04em;line-height:.9;font-size:clamp(36px,3.6vw,52px);color:#EFE9DF;">Order by<br><span style="color:#B8955A;">message.</span></h2>
+        <p style="margin:16px 0 0;max-width:360px;font-size:15.5px;line-height:1.6;color:#BDB6AA;">Tell us what you need. We confirm price and delivery time on WhatsApp — usually within the hour.</p>
+        <a href="{{ waMain }}" target="_blank" rel="noopener" style="margin-top:24px;display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:15px 22px;background:#1FA855;color:#fff;border-radius:2px;font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;" style-hover="background:#178F47;color:#fff;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2z"></path></svg>WhatsApp +256 773 828 552</a>
+        <div style="margin-top:28px;border-top:1px solid rgba(239,233,223,0.14);">
+          <div style="display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(239,233,223,0.12);"><span style="font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:#9C958A;">Call</span><a href="tel:+256773828552" style="font-size:16px;font-weight:600;color:#EFE9DF;overflow-wrap:anywhere;" style-hover="color:#B8955A;">+256 773 828 552</a></div>
+          <div style="display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(239,233,223,0.12);"><span style="font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:#9C958A;">Email</span><a href="mailto:hello@lamimeat.co.ug" style="font-size:16px;font-weight:600;color:#EFE9DF;overflow-wrap:anywhere;" style-hover="color:#B8955A;">hello@lamimeat.co.ug</a></div>
+          <div style="display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(239,233,223,0.12);"><span style="font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:#9C958A;">Hours</span><span style="font-size:16px;font-weight:600;color:#EFE9DF;">Mon–Sat · 8am–6pm</span></div>
+          <div style="display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(239,233,223,0.12);"><span style="font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:#9C958A;">Kitchen</span><span style="font-size:16px;font-weight:600;color:#EFE9DF;">Kampala, Uganda</span></div>
+          <div style="display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(239,233,223,0.12);"><span style="font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:#9C958A;">Delivery</span><span style="font-size:16px;font-weight:600;color:#EFE9DF;">Across Kampala, kept cold</span></div>
+          <div style="display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(239,233,223,0.12);"><span style="font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:#9C958A;">Instagram</span><a href="https://instagram.com/lamimeat" target="_blank" rel="noopener" style="font-size:16px;font-weight:600;color:#EFE9DF;overflow-wrap:anywhere;" style-hover="color:#B8955A;">@lamimeat</a></div>
+        </div>
+        <div data-menu-pages style="display:none;margin-top:auto;padding-top:28px;">
+          <div style="font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:#9C958A;margin-bottom:12px;">Pages</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px 18px;"><sc-for list="{{ menuLinks }}" as="m" hint-placeholder-count="6"><a href="{{ m.href }}" onClick="{{ closeMenu }}" style="display:inline-flex;align-items:center;min-height:44px;font-size:15px;font-weight:600;color:#EFE9DF;" style-hover="color:#B8955A;">{{ m.label }}</a></sc-for></div>
+        </div>
+      </div>
+      <div data-menu-main style="flex-direction:column;flex:1;">
+      <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#B8955A;">Menu</div>
+      <nav style="margin-top:clamp(34px,7vh,72px);display:flex;flex-direction:column;">
+        <sc-for list="{{ menuLinks }}" as="m" hint-placeholder-count="6">
+          <a href="{{ m.href }}" onClick="{{ closeMenu }}" style="display:grid;grid-template-columns:44px 1fr;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(239,233,223,0.12);color:#EFE9DF;" style-hover="color:#B8955A;"><span style="font-family:'Anton',sans-serif;font-size:14px;color:#B8955A;">{{ m.num }}</span><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:clamp(28px,3vw,36px);letter-spacing:-0.01em;">{{ m.label }}</span></a>
+        </sc-for>
+      </nav>
+      <div data-menu-meta style="margin-top:auto;padding-top:28px;display:flex;flex-wrap:wrap;gap:12px 26px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;color:#9C958A;">
+        <span>Kampala, Uganda</span><span>+256 773 828 552</span><span>hello@lamimeat.co.ug</span><span>Mon–Sat · 8–6</span>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-toast-wrap style="position:fixed;left:50%;bottom:24px;z-index:80;transform:translateX(-50%);">
+    <sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+      <div data-toast-inner style="display:flex;align-items:center;gap:14px;background:#EFE9DF;color:#16171A;border-radius:2px;padding:14px 16px 14px 20px;box-shadow:0 20px 50px -20px rgba(0,0,0,0.7);">
+        <span style="font-size:14px;font-weight:600;">{{ toast }}</span>
+        <a data-btn href="Lami-Cart.dc.html" style="padding:10px 16px;background:#16171A;color:#EFE9DF;border-radius:2px;font-weight:700;font-size:13px;text-align:center;">View cart →</a>
+      </div>
+    </sc-if>
+  </div>
+
+  <header data-screen-label="Cart Header" style="padding:clamp(56px,7vw,110px) clamp(18px,4vw,46px) clamp(44px,5vw,72px);">
+    <div data-rsp="split" style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1.2fr .8fr;gap:24px clamp(36px,5vw,90px);align-items:end;padding-bottom:clamp(36px,4vw,56px);border-bottom:1px solid rgba(239,233,223,0.16);">
+      <div data-reveal data-mob-center-col style="display:flex;flex-direction:column;align-items:flex-start;">
+        <div data-eyebrow style="display:flex;align-items:center;gap:14px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#B8955A;margin-bottom:clamp(22px,2.6vw,34px);"><span style="width:36px;height:1px;background:#B8955A;flex-shrink:0;"></span><span>Your cart</span></div>
+        <h1 style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.045em;line-height:.88;font-size:clamp(50px,7.4vw,124px);color:#EFE9DF;">The<br><span style="color:#B8955A;">order.</span></h1>
+      </div>
+      <p data-reveal data-reveal-delay="120" style="margin:0;max-width:440px;font-size:clamp(16px,1.3vw,18px);line-height:1.66;color:#BDB6AA;">{{ cartIntro }}</p>
+    </div>
+  </header>
+
+  <section data-screen-label="Cart" style="padding:clamp(72px,9vw,128px) clamp(18px,4vw,46px);background:#EFE9DF;color:#16171A;padding-top:clamp(40px,5vw,64px);">
+    <div data-rsp="split" style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1.45fr .85fr;gap:clamp(32px,4vw,64px);align-items:start;">
+      <div>
+        <div style="display:flex;justify-content:space-between;padding-bottom:14px;border-bottom:1.5px solid #16171A;font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:#6E685F;"><span>Item</span><span>Total</span></div>
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+          <div data-mob-center-col style="display:flex;flex-direction:column;align-items:flex-start;padding:clamp(40px,5vw,64px) 0;">
+            <h2 style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.04em;line-height:.92;font-size:clamp(30px,3.4vw,50px);color:#16171A;">Nothing here yet.</h2>
+            <p style="margin:0;max-width:460px;font-size:clamp(15.5px,1.2vw,17.5px);line-height:1.66;color:#4A4640;margin-top:14px;">Pick a few packs from the range — they’ll wait here until you’re ready to send the order.</p>
+            <div data-cta-actions style="display:flex;margin-top:26px;"><a href="Lami-Products.dc.html" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:15px 26px;border-radius:2px;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;background:#16171A;color:#EFE9DF;border:none;" style-hover="background:#8A6A33;color:#EFE9DF;"><span data-full>See the range</span><span data-short>See range</span> →</a></div>
+          </div>
+        </sc-if>
+        <sc-for list="{{ lines }}" as="l" hint-placeholder-count="0">
+          <div data-rsp="cart-line" style="display:grid;grid-template-columns:96px 1fr auto 120px 46px;gap:12px clamp(12px,2vw,24px);align-items:center;padding:20px 0;border-bottom:1px solid rgba(22,23,26,0.18);">
+            <div data-cl="img" style="width:100%;aspect-ratio:1/1;overflow:hidden;background:#E4DCCF;">{{ l.imgEl }}</div>
+            <div style="min-width:0;"><div style="font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:#7D5E2A;">{{ l.kind }}</div><h3 style="margin:5px 0 0;font-weight:800;font-size:clamp(17px,1.6vw,21px);letter-spacing:-0.01em;line-height:1.15;">{{ l.name }}</h3><div style="margin-top:4px;font-family:'Space Mono',monospace;font-size:11.5px;color:#6E685F;">{{ l.size }} · {{ l.unit }}</div></div>
+            <div data-cl="step"><div style="display:inline-flex;align-items:center;border:1px solid rgba(22,23,26,0.3);border-radius:2px;"><button onClick="{{ l.dec }}" aria-label="Decrease" style="width:46px;height:46px;background:none;border:none;cursor:pointer;font-size:20px;color:inherit;">−</button><span style="min-width:30px;text-align:center;font-weight:800;font-size:16px;">{{ l.qty }}</span><button onClick="{{ l.inc }}" aria-label="Increase" style="width:46px;height:46px;background:none;border:none;cursor:pointer;font-size:20px;color:inherit;">+</button></div></div>
+            <div data-cl="total" style="text-align:right;font-weight:800;font-size:17px;">{{ l.total }}</div>
+            <button data-cl="rm" onClick="{{ l.remove }}" aria-label="Remove item" style="width:46px;height:46px;background:none;border:none;cursor:pointer;color:#6E685F;display:flex;align-items:center;justify-content:center;" style-hover="color:#16171A;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+          </div>
+        </sc-for>
+        <sc-if value="{{ hasLines }}" hint-placeholder-val="{{ false }}"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:20px;"><a href="Lami-Products.dc.html" style="font-weight:700;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;color:#16171A;border-bottom:1px solid #16171A;padding-bottom:3px;white-space:nowrap;">← Keep shopping</a><button onClick="{{ clearCart }}" style="background:none;border:none;cursor:pointer;padding:0;font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:#6E685F;">Clear cart</button></div></sc-if>
+      </div>
+      <aside data-rsp="sticky" data-reveal style="position:sticky;top:96px;background:#16171A;color:#EFE9DF;padding:clamp(26px,3vw,40px);">
+        <div data-eyebrow style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#B8955A;">Summary</div>
+        <div style="margin-top:20px;border-top:1px solid rgba(239,233,223,0.16);">
+          <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(239,233,223,0.12);font-size:15px;color:#BDB6AA;"><span>Packs</span><span>{{ cartCount }}</span></div>
+          <div style="display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(239,233,223,0.12);font-size:15px;color:#BDB6AA;"><span>Delivery</span><span style="text-align:right;">Confirmed on WhatsApp</span></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:20px;"><span style="font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:#9C958A;">Subtotal</span><span style="font-weight:900;font-size:clamp(26px,2.4vw,34px);letter-spacing:-0.02em;">{{ subtotal }}</span></div>
+        <label style="display:block;margin-top:24px;"><span style="display:block;font-family:'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:#9C958A;margin-bottom:2px;">Deliver to</span><input data-field type="text" value="{{ area }}" onInput="{{ onArea }}" placeholder="Area or address" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(239,233,223,0.3);border-radius:0;padding:12px 2px;font-family:'Hanken Grotesk',sans-serif;font-size:16px;color:#EFE9DF;"></label>
+        <sc-if value="{{ hasLines }}" hint-placeholder-val="{{ false }}"><a href="{{ checkout }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:15px 26px;border-radius:2px;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;background:#1FA855;color:#fff;border:none;width:100%;margin-top:24px;" style-hover="background:#178F47;color:#fff;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2z"></path></svg>Send order</a></sc-if>
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}"><div style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:15px 26px;border-radius:2px;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;width:100%;margin-top:24px;border:1px solid rgba(239,233,223,0.2);color:#7C766C;cursor:default;">Cart is empty</div></sc-if>
+        <p style="margin:16px 0 0;font-size:13.5px;line-height:1.55;color:#9C958A;">Prices are per pack. We confirm your total and delivery time before anything is charged.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section data-screen-label="Add more" style="padding:clamp(72px,9vw,128px) clamp(18px,4vw,46px);">
+    <div style="max-width:1320px;margin:0 auto;">
+      <div data-eyebrow data-reveal style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#B8955A;margin-bottom:clamp(20px,3vw,32px);">Add to the order</div>
+      <div style="border-top:1px solid rgba(239,233,223,0.16);">
+        <sc-for list="{{ extras }}" as="x" hint-placeholder-count="4">
+          <div data-rsp="range-row" style="display:grid;grid-template-columns:52px 72px 1fr auto;gap:clamp(14px,2vw,28px);align-items:center;padding:16px 0;border-bottom:1px solid rgba(239,233,223,0.12);">
+            <span style="font-family:'Anton',sans-serif;font-size:22px;color:#B8955A;">{{ x.num }}</span>
+            <div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:#202226;">{{ x.imgEl }}</div>
+            <div style="min-width:0;"><div style="font-weight:800;font-size:clamp(17px,1.6vw,21px);">{{ x.name }}</div><div style="margin-top:3px;font-family:'Space Mono',monospace;font-size:11.5px;color:#9C958A;">500g · {{ x.price }}</div></div>
+            <div data-range-buy style="display:flex;"><button onClick="{{ x.add }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:15px 26px;border-radius:2px;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;background:transparent;color:#EFE9DF;border:1px solid rgba(239,233,223,0.4);min-height:46px;padding:12px 18px;font-size:13px;" style-hover="border-color:#EFE9DF;color:#EFE9DF;">+ Add 500g</button></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-screen-label="Footer" style="background:#0F1012;color:#BDB6AA;padding:clamp(54px,6vw,80px) clamp(18px,4vw,46px) 30px;border-top:1px solid rgba(239,233,223,0.1);">
+    <div style="max-width:1320px;margin:0 auto;">
+      <div data-rsp="footer-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:clamp(28px,4vw,56px);padding-bottom:clamp(36px,4vw,52px);border-bottom:1px solid rgba(239,233,223,0.12);">
+        <div data-foot-logo style="display:flex;flex-direction:column;align-items:flex-start;">
+          <img src="uploads/lami-logo-light.svg" alt="LAMI MEAT" style="height:76px;width:auto;display:block;margin-bottom:18px;">
+          <p style="margin:0;max-width:320px;font-size:14.5px;line-height:1.6;color:#9C958A;">Smokehouse and butchery in Kampala, Uganda. Crafted for the finest taste.</p>
+        </div>
+        <div data-foot-col>
+          <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#B8955A;margin-bottom:16px;">Explore</div>
+          <div data-foot-links style="display:flex;flex-direction:column;gap:11px;">
+            <sc-for list="{{ menuLinks }}" as="m" hint-placeholder-count="6"><a href="{{ m.href }}" style="color:#EFE9DF;font-size:15px;" style-hover="color:#B8955A;">{{ m.label }}</a></sc-for>
+          </div>
+        </div>
+        <div data-foot-col>
+          <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#B8955A;margin-bottom:16px;">Get in touch</div>
+          <div data-foot-links data-foot-contact style="display:flex;flex-direction:column;gap:11px;">
+            <a href="{{ waMain }}" target="_blank" rel="noopener" style="color:#EFE9DF;font-size:15px;" style-hover="color:#B8955A;">+256 773 828 552</a>
+            <a href="mailto:hello@lamimeat.co.ug" style="color:#EFE9DF;font-size:15px;" style-hover="color:#B8955A;">hello@lamimeat.co.ug</a>
+            <a href="https://instagram.com/lamimeat" target="_blank" rel="noopener" style="color:#EFE9DF;font-size:15px;" style-hover="color:#B8955A;">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div data-foot-bar style="display:flex;justify-content:space-between;gap:10px 18px;flex-wrap:wrap;padding-top:22px;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:#7C766C;">
+        <span>© {{ year }} LAMI MEAT Ltd · Kampala</span>
+        <span>Crafted for the finest taste</span>
+      </div>
+    </div>
+  </footer>
+</div>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#16171A"/><text x="50" y="64" font-family="Arial Black,sans-serif" font-weight="900" font-size="30" fill="#B8955A" text-anchor="middle">LM</text></svg></template>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;256773828552&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  static sanitizeBox(raw) {
+    const out = {};
+    if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
+      for (const k in raw) { const q = Math.floor(Number(raw[k])); if (/__(?:500g|1kg)$/.test(k) && Number.isFinite(q) && q > 0) out[k] = q; }
+    }
+    return out;
+  }
+  state = { menuOpen: false, searchOpen: false, email: '', subscribed: false, emailBad: false, toast: null, tick: 0, box: {}, fold: '', err: '', area: '' };
+
+  componentDidMount() {
+    try { const s = JSON.parse(localStorage.getItem('lm-newsletter') || 'null'); if (s && s.email) this.setState({ subscribed: true }); } catch (e) {}
+    this._key = (e) => { if (e.key === 'Escape') { if (this.state.menuOpen) this.closeMenu(); if (this.state.searchOpen) this.closeSearch(); } };
+    window.addEventListener('keydown', this._key);
+    this.initReveals();
+    if (this.pageMount) this.pageMount();
+  }
+  componentDidUpdate() { this.initReveals(); }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this._key);
+    if (this._onReveal) window.removeEventListener('scroll', this._onReveal);
+    clearTimeout(this._safety); clearTimeout(this._toastT);
+    document.body.style.overflow = '';
+    clearInterval(this._iv);
+  }
+
+  initReveals() {
+    const root = document.getElementById('lm-home');
+    if (!root) return;
+    this._rev = this._rev || [];
+    root.querySelectorAll('[data-reveal]').forEach((el) => {
+      if (el.__rev) return; el.__rev = 1;
+      el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1)';
+      const d = el.getAttribute('data-reveal-delay'); if (d) el.style.transitionDelay = d + 'ms';
+      this._rev.push(el);
+    });
+    const check = () => {
+      const vh = window.innerHeight || 800;
+      this._rev = this._rev.filter((el) => { const r = el.getBoundingClientRect(); if (r.top < vh * 0.92) { el.style.opacity = '1'; el.style.transform = 'none'; return false; } return true; });
+    };
+    check();
+    if (!this._onReveal) { this._onReveal = () => requestAnimationFrame(check); window.addEventListener('scroll', this._onReveal, { passive: true }); }
+    clearTimeout(this._safety);
+    this._safety = setTimeout(() => { (this._rev || []).forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none'; }); this._rev = []; }, 4000);
+  }
+
+  addToCart(name) {
+    let b = {};
+    try { b = Component.sanitizeBox(JSON.parse(localStorage.getItem('lm-box') || '{}')); } catch (e) {}
+    const k = name + '__500g'; b[k] = (b[k] || 0) + 1;
+    try { localStorage.setItem('lm-box', JSON.stringify(b)); } catch (e) {}
+    clearTimeout(this._toastT);
+    this.setState((s) => ({ toast: name + ' (500g) added to cart', tick: s.tick + 1 }));
+    this._toastT = setTimeout(() => this.setState({ toast: null }), 3200);
+  }
+
+  openMenu() {
+    document.body.style.overflow = 'hidden';
+    this.setState({ menuOpen: true }, () => {
+      const p = document.querySelector('#lm-menu [data-menu-panel]');
+      if (p && p.animate) p.animate([{ transform: 'translateX(100%)' }, { transform: 'translateX(0)' }], { duration: 520, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'both' });
+    });
+  }
+  closeMenu() {
+    document.body.style.overflow = '';
+    const p = document.querySelector('#lm-menu [data-menu-panel]');
+    if (p && p.animate) { const a = p.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(100%)' }], { duration: 300, easing: 'cubic-bezier(.5,0,.75,0)', fill: 'both' }); a.onfinish = () => this.setState({ menuOpen: false }); }
+    else this.setState({ menuOpen: false });
+  }
+  openSearch() { this.setState({ searchOpen: true }, () => { const i = document.querySelector('#lm-search [data-search-input]'); if (i) setTimeout(() => i.focus(), 240); }); }
+  closeSearch() { this.setState({ searchOpen: false }); }
+
+  renderVals() {
+    const num = (this.props.whatsappNumber ?? '256773828552').replace(/[^0-9]/g, '');
+    const wa = (m) => 'https://wa.me/' + num + '?text=' + encodeURIComponent(m);
+    const img = (src, alt) => React.createElement('img', { src, alt, style: { display: 'block', width: '100%', height: '100%', objectFit: 'cover' } });
+    const products = [
+      { kind: 'Smoked', name: 'Smoked Beef Sausages', desc: 'Pure beef, slow-smoked over wood with our house spice.', price500: 'UGX 15,000', price1k: 'UGX 30,000', img: 'uploads/lami/pack-hotdog.jpg' },
+      { kind: 'Smoked', name: 'Beef Hot Dogs', desc: 'Long, juicy and fully smoked — ready for the bun.', price500: 'UGX 15,000', price1k: 'UGX 30,000', img: 'uploads/lami/pack-hotdog-2.jpg' },
+      { kind: 'Fresh', name: 'Minced Beef', desc: '100% beef, minced the same morning. For sauces, burgers and samosas.', price500: 'UGX 12,000', price1k: 'UGX 24,000', img: 'uploads/lami/minced-500.jpg' },
+      { kind: 'Fresh', name: 'Lean Minced Beef', desc: 'An extra-lean cut for lighter family meals.', price500: 'UGX 14,000', price1k: 'UGX 28,000', img: 'uploads/lami/minced-500-b.jpg' }
+    ].map((p, i) => ({ ...p, num: '0' + (i + 1), imgEl: img(p.img, p.name), addToCart: () => this.addToCart(p.name), order: wa("Hi LAMI MEAT! I'd like to order " + p.name + ' (500g, ' + p.price500 + ').') }));
+    const ledger = [
+      { num: 'No. 01', title: 'Smoked over wood', desc: 'Sausages and hot dogs hung over a real fire until the colour is right.' },
+      { num: 'No. 02', title: 'Minced every morning', desc: 'Pure beef, ground, weighed and sealed by hand the same day.' },
+      { num: 'No. 03', title: 'Cold to your door', desc: 'Kept frozen from our kitchen to your kitchen across Kampala.' }
+    ].map((l, i) => ({ ...l, delay: String(i * 90) }));
+    const steps = [
+      { num: '01', title: 'Selected', desc: 'Beef from trusted Ugandan suppliers, checked on arrival before it enters the room.', img: 'uploads/lami/team-line.jpg' },
+      { num: '02', title: 'Weighed & packed', desc: 'Our trained team portions every pack by hand on calibrated scales.', img: 'uploads/lami/team-1.jpg' },
+      { num: '03', title: 'Sealed & labelled', desc: 'Each pack carries its batch number, production and expiry dates.', img: 'uploads/lami/minced-tray.jpg' }
+    ].map((s, i) => ({ ...s, delay: String(i * 90), imgEl: img(s.img, s.title) }));
+    const testimonials = [
+      { name: 'Grace N.', where: 'Ntinda', text: 'You can actually taste the smoke. They’ve become our Saturday breakfast.' },
+      { name: 'David K.', where: 'Kira', text: 'Clean, lean mince — no water in the pan. One pack fed the whole family.' },
+      { name: 'Aisha M.', where: 'Muyenga', text: 'The hot dogs were the hit of my son’s birthday. Delivered cold and well packed.' }
+    ].map((t, i) => ({ ...t, delay: String(i * 90) }));
+    const menuLinks = [['Home', 'Lami-Home.dc.html'], ['The Range', 'Lami-Products.dc.html'], ['Our Story', 'Lami-About.dc.html'], ['Recipes', 'Lami-Recipes.dc.html'], ['Careers', 'Lami-Careers.dc.html'], ['Contact', 'Lami-Order.dc.html']].map(([label, href], i) => ({ label, href, num: '0' + (i + 1) }));
+    let cartCount = 0;
+    try { Object.values(Component.sanitizeBox(JSON.parse(localStorage.getItem('lm-box') || '{}'))).forEach((v) => { cartCount += v; }); } catch (e) {}
+    const __base = {
+      waMain: wa("Hi LAMI MEAT! I'd like to place an order."),
+      products, ledger, steps, testimonials, menuLinks,
+      cartCount, cartShow: cartCount > 0,
+      toast: this.state.toast || '', toastShow: !!this.state.toast,
+      menuOpen: !!this.state.menuOpen, searchOpen: !!this.state.searchOpen,
+      openMenu: (this._om = this._om || (() => this.openMenu())),
+      closeMenu: (this._cm = this._cm || (() => this.closeMenu())),
+      openSearch: (this._os = this._os || (() => this.openSearch())),
+      closeSearch: (this._cs = this._cs || (() => this.closeSearch())),
+      email: this.state.email,
+      onEmail: (e) => this.setState({ email: e.target.value }),
+      subscribe: () => {
+        const em = (this.state.email || '').trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { this.setState({ emailBad: true }); return; }
+        try { localStorage.setItem('lm-newsletter', JSON.stringify({ email: em, at: Date.now() })); } catch (e) {}
+        this.setState({ subscribed: true, emailBad: false });
+      },
+      emailBad: !!this.state.emailBad, subscribed: !!this.state.subscribed, notSubscribed: !this.state.subscribed,
+      year: new Date().getFullYear()
+    };
+    return Object.assign(__base, this.pageVals(wa));
+  }
+  static fmt(n) { return 'UGX ' + Number(n).toLocaleString('en-US'); }
+  static PRODUCTS = [
+    { id: 'smoked-sausages', kind: 'Smoked', name: 'Smoked Beef Sausages', p500: 15000, p1k: 30000, img: 'uploads/lami/pack-hotdog.jpg', long: 'Pure beef, seasoned with our house spice, filled by hand and hung over a wood fire until deep amber. Fully smoked — warm through on the pan or grill.', specs: [['Storage', 'Frozen, −18°C'], ['To cook', 'Pan or grill, 8–10 min'], ['Keeps', '3 months frozen'], ['Pack', 'Vacuum-sealed']] },
+    { id: 'hot-dogs', kind: 'Smoked', name: 'Beef Hot Dogs', p500: 15000, p1k: 30000, img: 'uploads/lami/pack-hotdog-2.jpg', long: 'Long, juicy and fully smoked. Simmer or grill for a few minutes and they’re ready for the bun.', specs: [['Storage', 'Frozen, −18°C'], ['To cook', 'Simmer or grill, 5 min'], ['Keeps', '3 months frozen'], ['Pack', 'Vacuum-sealed']] },
+    { id: 'minced-beef', kind: 'Fresh', name: 'Minced Beef', p500: 12000, p1k: 24000, img: 'uploads/lami/minced-500.jpg', long: '100% beef, minced the same morning it’s packed. For sauces, burgers, samosas and stews.', specs: [['Storage', 'Chilled 0–4°C or frozen'], ['To cook', 'Brown well, 8–10 min'], ['Keeps', '2 days chilled · 3 months frozen'], ['Pack', 'Sealed tray']] },
+    { id: 'lean-minced-beef', kind: 'Fresh', name: 'Lean Minced Beef', p500: 14000, p1k: 28000, img: 'uploads/lami/minced-500-b.jpg', long: 'An extra-lean cut, trimmed before mincing, for lighter family meals and less fat in the pan.', specs: [['Storage', 'Chilled 0–4°C or frozen'], ['To cook', 'Brown well, 8–10 min'], ['Keeps', '2 days chilled · 3 months frozen'], ['Pack', 'Sealed tray']] }
+  ];
+  readBox() { try { return Component.sanitizeBox(JSON.parse(localStorage.getItem('lm-box') || '{}')); } catch (e) { return {}; } }
+  writeBox(b) { try { localStorage.setItem('lm-box', JSON.stringify(b)); } catch (e) {} this.setState({ box: b }); }
+  addLine(name, size, qty) {
+    const b = this.readBox(); const k = name + '__' + size; b[k] = (b[k] || 0) + qty;
+    try { localStorage.setItem('lm-box', JSON.stringify(b)); } catch (e) {}
+    clearTimeout(this._toastT);
+    this.setState((s) => ({ box: b, toast: qty + ' × ' + name + ' (' + size + ') added', tick: s.tick + 1 }));
+    this._toastT = setTimeout(() => this.setState({ toast: null }), 3200);
+  }
+  bind(k, after) { this._b = this._b || {}; return this._b[k] = this._b[k] || ((e) => this.setState({ [k]: e.target.value, err: '' }, after)); }
+  folds(keys) { const open = {}, toggle = {}; keys.forEach((k) => { open[k] = this.state.fold === k; toggle[k] = () => this.setState((s) => ({ fold: s.fold === k ? '' : k })); }); return { open, toggle }; }
+
+  pageMount() { this.setState({ box: this.readBox() }); try { const d = JSON.parse(localStorage.getItem('lm-order-draft') || 'null'); if (d && d.area) this.setState({ area: d.area }); } catch (e) {} }
+  pageVals(wa) {
+    const P = Component.PRODUCTS, f = Component.fmt, box = this.state.box || {};
+    const change = (k, d) => { const b = { ...this.readBox() }; b[k] = Math.max(0, (b[k] || 0) + d); if (!b[k]) delete b[k]; this.writeBox(b); };
+    let sub = 0; const msg = [];
+    const lines = Object.keys(box).map((k) => {
+      const [name, size] = k.split('__'); const p = P.find((x) => x.name === name); if (!p) return null;
+      const unit = size === '1kg' ? p.p1k : p.p500, qty = box[k]; sub += unit * qty;
+      msg.push('- ' + qty + ' × ' + name + ' (' + size + ') — ' + f(unit * qty));
+      return { key: k, name, size, kind: p.kind, imgEl: React.createElement('img', { src: p.img, alt: p.name, style: { display: 'block', width: '100%', height: '100%', objectFit: 'cover' } }), qty, unit: f(unit), total: f(unit * qty), inc: () => change(k, 1), dec: () => change(k, -1), remove: () => change(k, -999) };
+    }).filter(Boolean);
+    const count = lines.reduce((a, l) => a + l.qty, 0);
+    const extras = P.map((p, i) => ({ num: '0' + (i + 1), name: p.name, imgEl: React.createElement('img', { src: p.img, alt: p.name, style: { display: 'block', width: '100%', height: '100%', objectFit: 'cover' } }), price: f(p.p500), add: () => this.addLine(p.name, '500g', 1) }));
+    const area = this.state.area || '';
+    return {
+      lines, extras, hasLines: lines.length > 0, isEmpty: lines.length === 0,
+      cartCount: count, cartShow: count > 0, subtotal: f(sub),
+      cartIntro: count ? count + (count === 1 ? ' pack' : ' packs') + ' ready to send. Check sizes and quantities, then send the order on WhatsApp — we confirm the total and delivery time.' : 'Your cart is empty. Everything you add from the range will wait here until you send it.',
+      area, onArea: this.bind('area', () => { try { const d = JSON.parse(localStorage.getItem('lm-order-draft') || '{}') || {}; d.area = this.state.area; localStorage.setItem('lm-order-draft', JSON.stringify(d)); } catch (e) {} }),
+      clearCart: () => this.writeBox({}),
+      checkout: wa("Hi LAMI MEAT! I'd like to order:\n" + msg.join('\n') + '\n\nSubtotal: ' + f(sub) + '\nDeliver to: ' + (area || '—'))
+    };
+  }
+}
+</script>
+</body>
+</html>
