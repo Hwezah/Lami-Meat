@@ -39,17 +39,13 @@ Button rows marked `data-cta-actions` get the 80vw / 2-up / no-wrap treatment au
 use `<span data-full>` / `<span data-short>` for short portrait labels.
 
 ## Status
-| Page | State |
-|---|---|
-| Home | Built (all sections, newsletter, rotating word) |
-| The Range | Header, filters, product articles with size/qty/add/WhatsApp. Wholesale split + care steps to do |
-| Cart | Lines, steppers, summary, WhatsApp checkout. Extras list to do |
-| Our Story, Contact, Recipes, Careers, Account | Header only (+ Recipes ticker). Sections listed on each page |
+All 8 pages are built from the design references: Home, The Range, Our Story, Contact (order form, wholesale, FAQ), Cart, Recipes, Careers, Account.
+Recipes, jobs, FAQ answers, Our Story chapters and testimonials are placeholder copy (in `data/`).
 
 ## Open items (client)
 - Real email (replace `hello@lamimeat.co.ug` via `NEXT_PUBLIC_EMAIL`)
 - Final logo (+ exact logo red to replace `#C8372D`) → `public/brand/`
-- Photos: in place. Still needed: a Beef Hot Dogs pack shot and a Lean Minced Beef pack shot (both use temporary copies, see `public/images/README.md`)
+- Photos: in place. A plated food shot would suit the featured recipe (it currently uses the smokehouse photo). Still needed: a Beef Hot Dogs pack shot and a Lean Minced Beef pack shot (both use temporary copies, see `public/images/README.md`)
 - Peridot font → `public/fonts/`
 - Real copy: delivery areas, payments, minimum order, storage, jobs, recipes, ticker tips, Our Story, testimonials, rotating words
 - OG images for WhatsApp link previews
