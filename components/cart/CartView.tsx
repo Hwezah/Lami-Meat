@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CloseIcon, WhatsAppIcon } from "@/components/Icons";
 import { PageHeader } from "@/components/PageHeader";
+import { Ticker } from "@/components/Ticker";
+import { tickers } from "@/data/tickers";
 import { Photo } from "@/components/Photo";
 import { QtyStepper } from "@/components/QtyStepper";
 import { cta, ctaSm, field, fieldLabel } from "@/components/ui";
@@ -41,11 +43,12 @@ export function CartView() {
   return (
     <>
       <PageHeader eyebrow="Your cart" line1="The" line2="order.">
-        <p className="m-0">
-          {n
-            ? `${n} ${n === 1 ? "pack" : "packs"} ready to send. Check sizes and quantities, then send the order on WhatsApp — we confirm the total and delivery time.`
-            : "Your cart is empty. Everything you add from the range will wait here until you send it."}
-        </p>
+        <Ticker
+          lines={[
+            n ? `${n} ${n === 1 ? "pack" : "packs"} ready to send. Check sizes and quantities, then send the order on WhatsApp — we confirm the total and delivery time.` : tickers.cart[0],
+            ...tickers.cart.slice(1),
+          ]}
+        />
       </PageHeader>
 
       <section className="lm-section bg-bone !pt-[clamp(40px,5vw,64px)] text-ink">

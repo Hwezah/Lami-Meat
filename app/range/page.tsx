@@ -3,6 +3,8 @@ import { Eyebrow } from "@/components/Eyebrow";
 import { PageHeader } from "@/components/PageHeader";
 import { Photo } from "@/components/Photo";
 import { ProductList } from "@/components/range/ProductList";
+import { Ticker } from "@/components/Ticker";
+import { tickers } from "@/data/tickers";
 import { cta } from "@/components/ui";
 import { careSteps } from "@/data/care";
 import { waDefault } from "@/lib/whatsapp";
@@ -17,7 +19,7 @@ export default function RangePage() {
   return (
     <>
       <PageHeader eyebrow="The range · Four cuts" line1="The" line2="Range.">
-        <p className="m-0">Two smoked, two fresh — all pure beef. Every pack is weighed, sealed and labelled with its batch number and dates.</p>
+        <Ticker lines={tickers.range} />
       </PageHeader>
 
       <ProductList />

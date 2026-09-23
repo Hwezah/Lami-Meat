@@ -3,6 +3,8 @@ import { Eyebrow } from "@/components/Eyebrow";
 import { FoldList } from "@/components/FoldList";
 import { PageHeader } from "@/components/PageHeader";
 import { Photo } from "@/components/Photo";
+import { Ticker } from "@/components/Ticker";
+import { tickers } from "@/data/tickers";
 import { cta, ctaSm } from "@/components/ui";
 import { perks, roles } from "@/data/roles";
 import { site } from "@/lib/config";
@@ -19,7 +21,7 @@ export default function CareersPage() {
   return (
     <>
       <PageHeader eyebrow="Careers" line1="Join the" line2="counter.">
-        <p className="m-0">We’re a small team that takes the work seriously — clean, careful and proud of what leaves the room.</p>
+        <Ticker lines={tickers.careers} />
       </PageHeader>
 
       <section className="px-[clamp(18px,4vw,46px)] max-xs:px-6 mp:px-3.5">

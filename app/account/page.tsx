@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
 import { AccountEyebrow, AccountPanel } from "@/components/account/AccountPanel";
 import { FramedPhoto } from "@/components/FramedPhoto";
+import { Ticker } from "@/components/Ticker";
+import { tickers } from "@/data/tickers";
 
 export const metadata: Metadata = {
   title: "Account",
   description: "Sign in or create a LAMI MEAT account to save your cart and reorder faster.",
   robots: { index: false },
 };
-
-const benefits = [
-  { title: "Save your cart", desc: "Pick up where you left off." },
-  { title: "Reorder faster", desc: "Your details, ready to send." },
-  { title: "Member offers", desc: "New cuts and recipes first." },
-];
 
 export default function AccountPage() {
   return (
@@ -24,13 +20,8 @@ export default function AccountPage() {
         </div>
         <figure data-reveal data-reveal-delay="120" className="m-0">
           <FramedPhoto src="/images/team-line-3.jpg" alt="The LAMI packing room" />
-          <div className="mt-11 grid grid-cols-3 border-t border-bone/16 max-sm:grid-cols-1">
-            {benefits.map((b) => (
-              <div key={b.title} className="pt-[18px] pr-3.5">
-                <div className="text-base font-extrabold text-bone">{b.title}</div>
-                <div className="mt-[5px] text-sm leading-normal text-dark-muted">{b.desc}</div>
-              </div>
-            ))}
+          <div className="mt-11 border-t border-bone/16 pt-7 mp:text-center">
+            <Ticker lines={tickers.account} />
           </div>
         </figure>
       </div>

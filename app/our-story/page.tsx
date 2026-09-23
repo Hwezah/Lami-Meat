@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Eyebrow } from "@/components/Eyebrow";
 import { PageHeader } from "@/components/PageHeader";
 import { Photo } from "@/components/Photo";
+import { Ticker } from "@/components/Ticker";
+import { tickers } from "@/data/tickers";
 import { cta } from "@/components/ui";
 import { chapters, mosaic, rules } from "@/data/story";
 import { waDefault } from "@/lib/whatsapp";
@@ -16,7 +18,7 @@ export default function OurStoryPage() {
   return (
     <>
       <PageHeader eyebrow="Our story" line1="Fire, beef" line2="& patience.">
-        <p className="m-0">LAMI MEAT is a Kampala smokehouse and butchery. We make a short list of beef products and make them properly — every batch, every day.</p>
+        <Ticker lines={tickers.ourStory} />
       </PageHeader>
 
       {/* Figure */}

@@ -47,15 +47,10 @@
   --ease-lm: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-word-in: word-in 0.7s var(--ease-lm) both;
-  --animate-rise: rise 60s linear infinite;
 
   @keyframes word-in {
     from { opacity: 0; transform: translateY(0.35em); filter: blur(6px); }
     to { opacity: 1; transform: none; filter: none; }
-  }
-  @keyframes rise {
-    from { transform: translateY(0); }
-    to { transform: translateY(-50%); }
   }
 }
 
@@ -214,8 +209,25 @@
     transform: none;
     transition: none;
   }
-  .animate-word-in,
-  .animate-rise {
+  .animate-word-in {
     animation: none !important;
+  }
+}
+
+/* Page-header ticker (components/Ticker.tsx). The track holds the list twice and
+   rises by exactly one copy (-50%), so the loop point is seamless. */
+@keyframes lm-rise {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+.lm-ticker-track {
+  animation: lm-rise var(--ticker-duration, 60s) linear infinite;
+}
+.lm-ticker:hover .lm-ticker-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lm-ticker-track {
+    animation: none;
   }
 }

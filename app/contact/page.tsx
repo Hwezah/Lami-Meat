@@ -5,6 +5,8 @@ import { Eyebrow } from "@/components/Eyebrow";
 import { FoldList } from "@/components/FoldList";
 import { PageHeader } from "@/components/PageHeader";
 import { Photo } from "@/components/Photo";
+import { Ticker } from "@/components/Ticker";
+import { tickers } from "@/data/tickers";
 import { faq } from "@/data/faq";
 import { mailHref, site, telHref } from "@/lib/config";
 import { waDefault } from "@/lib/whatsapp";
@@ -30,7 +32,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHeader eyebrow="Contact & order" line1="Send us" line2="a message.">
-        <p className="m-0">Tell us what you need. We confirm the order, price and delivery time on WhatsApp — usually within the hour.</p>
+        <Ticker lines={tickers.contact} />
       </PageHeader>
 
       {/* No. 01 Reach us + order form */}

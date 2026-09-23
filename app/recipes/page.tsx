@@ -8,6 +8,7 @@ import { RecipeBody } from "@/components/recipes/RecipeBody";
 import { Ticker } from "@/components/Ticker";
 import { cta, ctaSm } from "@/components/ui";
 import { featured, recipes } from "@/data/recipes";
+import { tickers } from "@/data/tickers";
 
 export const metadata: Metadata = { title: "Recipes", description: "Simple recipes for LAMI smoked sausages, hot dogs and minced beef." };
 
@@ -15,7 +16,7 @@ export default function RecipesPage() {
   return (
     <>
       <PageHeader eyebrow="Recipes" line1="From our" line2="kitchen.">
-        <Ticker />
+        <Ticker lines={tickers.recipes} />
       </PageHeader>
 
       {/* Featured recipe */}
