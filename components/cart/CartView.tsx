@@ -52,7 +52,7 @@ export function CartView() {
       </PageHeader>
 
       <section className="lm-section bg-bone !pt-[clamp(40px,5vw,64px)] text-ink">
-        <div className="lm-wrap grid grid-cols-[1.45fr_.85fr] items-start gap-[clamp(32px,4vw,64px)] max-lg:grid-cols-1">
+        <div className="lm-stick lm-wrap grid grid-cols-[1.45fr_.85fr] items-start gap-[clamp(32px,4vw,64px)] max-lg:grid-cols-1">
           <div>
             <div className="flex justify-between border-b-[1.5px] border-ink pb-3.5 font-mono text-[11px] tracking-[.14em] text-bone-muted uppercase">
               <span>Item</span>
@@ -107,7 +107,7 @@ export function CartView() {
             )}
           </div>
 
-          <aside data-reveal className="sticky top-24 bg-charcoal p-[clamp(26px,3vw,40px)] text-left text-bone max-lg:static">
+          <aside data-reveal className="bg-charcoal p-[clamp(26px,3vw,40px)] text-left text-bone">
             <div className="lm-eyebrow text-brass">Summary</div>
             <div className="mt-5 border-t border-bone/16 text-[15px] text-dark-body">
               <div className="flex justify-between border-b border-bone/12 py-3.5">

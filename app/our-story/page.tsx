@@ -41,7 +41,7 @@ export default function OurStoryPage() {
             <div
               key={c.label}
               data-reveal
-              className="grid grid-cols-[200px_1fr_1fr] items-start gap-x-[clamp(24px,4vw,64px)] gap-y-6 border-t border-bone/16 py-[clamp(36px,4vw,56px)] max-lg:grid-cols-2 max-sm:grid-cols-1"
+              className="lm-stick grid grid-cols-[200px_1fr_1fr] items-start gap-x-[clamp(24px,4vw,64px)] gap-y-6 border-t border-bone/16 py-[clamp(36px,4vw,56px)] max-lg:grid-cols-2 max-sm:grid-cols-1"
             >
               <Eyebrow className="max-lg:col-span-full">{c.label}</Eyebrow>
               <div>

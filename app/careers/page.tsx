@@ -59,7 +59,7 @@ export default function CareersPage() {
 
       {/* No. 02 Roles */}
       <section id="roles" className="lm-section scroll-mt-20 bg-bone text-ink mp:text-center">
-        <div className="lm-wrap grid grid-cols-[.8fr_1.2fr] items-start gap-x-[clamp(36px,5vw,90px)] gap-y-6 max-lg:grid-cols-1">
+        <div className="lm-stick lm-wrap grid grid-cols-[.8fr_1.2fr] items-start gap-x-[clamp(36px,5vw,90px)] gap-y-6 max-lg:grid-cols-1">
           <div>
             <Eyebrow tone="bone" className="mb-4">
               No. 02 — Open roles

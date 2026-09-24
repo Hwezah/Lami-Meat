@@ -37,7 +37,7 @@ export default function ContactPage() {
 
       {/* No. 01 Reach us + order form */}
       <section className="lm-section !pt-0">
-        <div className="lm-wrap grid grid-cols-[.9fr_1.1fr] items-start gap-[clamp(36px,5vw,90px)] max-lg:grid-cols-1">
+        <div className="lm-stick lm-wrap grid grid-cols-[.9fr_1.1fr] items-start gap-[clamp(36px,5vw,90px)] max-lg:grid-cols-1">
           <div>
             <Eyebrow className="mb-2.5">No. 01 — Reach us</Eyebrow>
             <div className="border-t border-bone/16">
@@ -55,7 +55,7 @@ export default function ContactPage() {
 
       {/* No. 02 Wholesale */}
       <section id="wholesale" className="lm-section scroll-mt-20 bg-bone text-ink mp:text-center">
-        <div className="lm-wrap grid grid-cols-2 items-start gap-[clamp(36px,5vw,90px)] max-lg:grid-cols-1">
+        <div className="lm-stick lm-wrap grid grid-cols-2 items-start gap-[clamp(36px,5vw,90px)] max-lg:grid-cols-1">
           <div className="flex flex-col items-start mp:items-center">
             <Eyebrow tone="bone" className="mb-4">
               No. 02 — Wholesale
@@ -78,7 +78,7 @@ export default function ContactPage() {
 
       {/* No. 03 FAQ */}
       <section className="lm-section mp:text-center">
-        <div className="lm-wrap grid grid-cols-[.8fr_1.2fr] items-start gap-x-[clamp(36px,5vw,90px)] gap-y-6 max-lg:grid-cols-1">
+        <div className="lm-stick lm-wrap grid grid-cols-[.8fr_1.2fr] items-start gap-x-[clamp(36px,5vw,90px)] gap-y-6 max-lg:grid-cols-1">
           <div>
             <Eyebrow className="mb-4">No. 03 — Good to know</Eyebrow>
             <h2 data-reveal className="lm-h2 text-bone">

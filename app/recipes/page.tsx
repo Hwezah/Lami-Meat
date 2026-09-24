@@ -21,7 +21,7 @@ export default function RecipesPage() {
 
       {/* Featured recipe */}
       <section className="lm-section !pt-0 mp:text-center">
-        <div className="lm-wrap grid grid-cols-2 items-start gap-[clamp(36px,5vw,90px)] max-lg:grid-cols-1">
+        <div className="lm-stick lm-wrap grid grid-cols-2 items-start gap-[clamp(36px,5vw,90px)] max-lg:grid-cols-1">
           <figure data-reveal className="m-0">
             <FramedPhoto src={featured.img} alt={featured.alt} />
             <figcaption className="mt-[30px] font-mono text-[11px] tracking-[.14em] text-dark-muted uppercase">Recipe {featured.num} — This week’s pick</figcaption>

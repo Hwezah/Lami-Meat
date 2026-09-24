@@ -19,7 +19,7 @@ function ProductArticle({ p }: { p: Product }) {
   const total = priceOf(p, size) * qty;
 
   return (
-    <article id={p.id} data-reveal className="grid scroll-mt-[90px] grid-cols-[.95fr_1.05fr] items-center gap-[clamp(36px,5vw,84px)] border-b border-ink/18 py-[clamp(40px,5vw,72px)] max-lg:grid-cols-1">
+    <article id={p.id} data-reveal className="lm-stick grid scroll-mt-[90px] grid-cols-[.95fr_1.05fr] items-center gap-[clamp(36px,5vw,84px)] border-b border-ink/18 py-[clamp(40px,5vw,72px)] max-lg:grid-cols-1">
       <FramedPhoto src={p.img} alt={p.name} aspect="aspect-[5/4]" offset={16} line="border-brass-deep-2" />
       <div className="flex min-w-0 flex-col items-start mp:items-center">
         <div className="flex items-baseline gap-3.5">

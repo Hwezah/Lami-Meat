@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function AccountPage() {
   return (
     <section className="px-[clamp(18px,4vw,46px)] pt-[clamp(56px,7vw,110px)] pb-[clamp(72px,9vw,128px)] max-xs:px-6 mp:px-3.5 mp:text-center">
-      <div className="lm-wrap grid grid-cols-2 items-center gap-[clamp(40px,6vw,110px)] max-lg:grid-cols-1">
+      <div className="lm-stick lm-wrap grid grid-cols-2 items-center gap-[clamp(40px,6vw,110px)] max-lg:grid-cols-1">
         <div data-reveal className="flex w-full max-w-[520px] flex-col items-start mp:mx-auto mp:items-center">
           <AccountEyebrow />
           <AccountPanel />

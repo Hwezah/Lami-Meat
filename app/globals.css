@@ -232,3 +232,15 @@
     animation: none;
   }
 }
+
+/* Sticky split columns. Put .lm-stick on a two-column grid: every column becomes
+   sticky below the nav, so whichever column is shorter stays in view while the
+   taller one scrolls (the taller column fills the row, so it never moves).
+   Only when the grid is actually two columns (≥920px). */
+@media (min-width: 920px) {
+  .lm-stick > * {
+    position: sticky;
+    top: var(--lm-stick-top, 104px);
+    align-self: start;
+  }
+}
