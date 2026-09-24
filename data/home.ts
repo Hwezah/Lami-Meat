@@ -1,8 +1,8 @@
 // Home page copy. Testimonials and the rotating-word list are PLACEHOLDER copy pending client review.
 
 export const heroWords = ["Mastered.", "Perfected.", "Trusted.", "Delivered.", "Sealed.", "Loved."];
-/** Colour cycles by index % 3: brass → signal red (match the final logo red) → bone. */
-export const heroWordColors = ["#B8955A", "#C8372D", "#EFE9DF"];
+/** Colour cycles by index % 3: brass → logo red → bone. */
+export const heroWordColors = ["#B8955A", "#D82828", "#EFE9DF"];
 
 export const ledger = [
   { num: "No. 01", title: "Smoked over wood", desc: "Sausages and hot dogs hung over a real fire until the colour is right." },

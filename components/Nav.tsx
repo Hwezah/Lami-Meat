@@ -33,7 +33,7 @@ export function Nav() {
         })}
       </div>
 
-      <Link href="/" aria-label="LAMI MEAT home" className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 max-lg:static max-lg:translate-none [&_img]:h-[46px] max-lg:[&_img]:h-10">
+      <Link href="/" aria-label="LAMI MEAT home" className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 max-lg:static max-lg:translate-none">
         <Logo />
       </Link>
 

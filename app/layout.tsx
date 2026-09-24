@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Hanken_Grotesk, Space_Mono } from "next/font/google";
+import { Anton, Hanken_Grotesk, Libre_Baskerville, Space_Mono } from "next/font/google";
 import { AuthModal } from "@/components/AuthModal";
 import { Footer } from "@/components/Footer";
 import { GlobalEffects } from "@/components/GlobalEffects";
@@ -14,6 +14,7 @@ import "./globals.css";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700", "800", "900"], style: ["normal", "italic"], variable: "--font-hanken" });
 const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-space-mono" });
+const logoSerif = Libre_Baskerville({ subsets: ["latin"], weight: "400", style: "italic", variable: "--font-logo-serif" });
 const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton" });
 
 export const metadata: Metadata = {
@@ -39,7 +40,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${hanken.variable} ${spaceMono.variable} ${anton.variable}`}>
+    <html lang="en" className={`${hanken.variable} ${spaceMono.variable} ${anton.variable} ${logoSerif.variable}`}>
       <body>
         <TopBar />
         <Nav />

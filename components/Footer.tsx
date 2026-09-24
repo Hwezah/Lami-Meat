@@ -13,7 +13,7 @@ export function Footer() {
       <div className="lm-wrap">
         <div className="grid grid-cols-[1.5fr_1fr_1fr] gap-[clamp(28px,4vw,56px)] border-b border-bone/12 pb-[clamp(36px,4vw,52px)] max-lg:grid-cols-3 max-lg:gap-x-[18px] max-lg:gap-y-[26px] max-sm:grid-cols-1 mp:gap-[30px]">
           <div className="flex flex-col items-start max-lg:col-span-full mp:items-center mp:text-center">
-            <div className="mb-[18px] [&_img]:h-[76px]">
+            <div className="mb-[18px]">
               <Logo variant="footer" />
             </div>
             <p className="m-0 max-w-[320px] text-[14.5px] leading-[1.6] text-dark-muted">Smokehouse and butchery in Kampala, Uganda. Crafted for the finest taste.</p>
