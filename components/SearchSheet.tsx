@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "@/components/LocaleLink";
 import { ugx } from "@/lib/format";
 import { useT } from "@/lib/i18n/provider";
-import { products } from "@/lib/products";
+import { getDict } from "@/lib/i18n/dict";
+import { searchProducts } from "@/lib/search";
 import { useUI } from "@/lib/ui";
 import { CloseIcon } from "./Icons";
 
@@ -22,10 +23,18 @@ export function SearchSheet() {
     return () => clearTimeout(timer);
   }, [isOpen]);
 
-  const term = q.trim().toLowerCase();
-  const hits = term
-    ? products.filter((p) => `${p.name} ${p.kind} ${t.products[p.id].name} ${t.common.kinds[p.kind]}`.toLowerCase().includes(term))
-    : [];
+  const term = q.trim();
+  // Search both languages so e.g. "sausage" works on the Arabic site and "نقانق" on the English one.
+  const hits = searchProducts(term, (p) => [
+    t.products[p.id].name,
+    p.name,
+    t.common.kinds[p.kind],
+    p.kind,
+    getDict("ar").products[p.id].name,
+    getDict("ar").common.kinds[p.kind],
+    t.products[p.id].short,
+    p.desc,
+  ]);
 
   return (
     <div className={`fixed inset-0 z-70 ${isOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"}`} aria-hidden={!isOpen}>

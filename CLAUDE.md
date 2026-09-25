@@ -18,3 +18,6 @@
 - Use logical utilities (`ms-/me-/ps-/pe-/start-/end-/text-start/text-end/border-s`) so layouts mirror in RTL; add `rtl:` variants for anything physical (transforms, gradients).
 - Cart keys and WhatsApp item names stay in English product names so the Kampala team can fulfil; display names come from `t.products[id]`.
 - Arabic styling lives at the end of `app/globals.css` (fonts, no letter-spacing, looser heading leading).
+
+## Search
+- `lib/search.ts` does the matching (normalisation, stemming, typos, synonyms in `ALIASES`). Add new product words there. `npm test` runs the query checks in `scripts/search.check.ts`; run it before pushing search changes.
