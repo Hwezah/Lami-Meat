@@ -86,6 +86,7 @@ export const ar: Dict = {
   search: {
     placeholder: "ابحث في منتجاتنا…",
     close: "إغلاق البحث",
+    clear: "مسح البحث",
     popular: "الأكثر طلباً",
     popularItems: ["نقانق مدخّنة", "هوت دوغ بقري", "لحم مفروم"],
     noMatch: "لا توجد نتائج. جرّب «نقانق» أو «مفروم».",

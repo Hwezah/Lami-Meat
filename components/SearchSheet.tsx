@@ -9,6 +9,21 @@ import { searchProducts } from "@/lib/search";
 import { useUI } from "@/lib/ui";
 import { CloseIcon } from "./Icons";
 
+/** Products matching `term`, searched in both languages so e.g. "sausage" works on the Arabic site and "نقانق" on the English one. */
+export function useSearchHits(term: string) {
+  const t = useT();
+  return searchProducts(term, (p) => [
+    t.products[p.id].name,
+    p.name,
+    t.common.kinds[p.kind],
+    p.kind,
+    getDict("ar").products[p.id].name,
+    getDict("ar").common.kinds[p.kind],
+    t.products[p.id].short,
+    p.desc,
+  ]);
+}
+
 /** Bone sheet that drops from the top. Filters products by their English and current-language names. */
 export function SearchSheet() {
   const isOpen = useUI((s) => s.overlay === "search");
@@ -24,17 +39,7 @@ export function SearchSheet() {
   }, [isOpen]);
 
   const term = q.trim();
-  // Search both languages so e.g. "sausage" works on the Arabic site and "نقانق" on the English one.
-  const hits = searchProducts(term, (p) => [
-    t.products[p.id].name,
-    p.name,
-    t.common.kinds[p.kind],
-    p.kind,
-    getDict("ar").products[p.id].name,
-    getDict("ar").common.kinds[p.kind],
-    t.products[p.id].short,
-    p.desc,
-  ]);
+  const hits = useSearchHits(term);
 
   return (
     <div className={`fixed inset-0 z-70 ${isOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"}`} aria-hidden={!isOpen}>

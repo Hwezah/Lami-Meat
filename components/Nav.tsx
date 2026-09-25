@@ -43,7 +43,7 @@ export function Nav() {
       </Link>
 
       <div className="flex min-w-0 flex-1 items-center justify-end gap-[clamp(6px,1.1vw,14px)] mp:gap-0.5">
-        <button onClick={() => open("search")} aria-label={t.nav.search} className={iconBtn}>
+        <button onClick={() => open("search")} aria-label={t.nav.search} className={`${iconBtn} mp:hidden`}>
           <SearchIcon />
         </button>
         <button onClick={() => openAuth(session ? "signout" : "login")} aria-label={t.nav.account} className={iconBtn}>

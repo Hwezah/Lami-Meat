@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "@/components/LocaleLink";
 import { menuLinks } from "@/data/nav";
 import { mailHref, site, telHref } from "@/lib/config";
 import { useT } from "@/lib/i18n/provider";
 import { useUI } from "@/lib/ui";
 import { wa } from "@/lib/whatsapp";
-import { CloseIcon, WhatsAppIcon } from "./Icons";
+import { ugx } from "@/lib/format";
+import { CloseIcon, SearchIcon, WhatsAppIcon } from "./Icons";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useSearchHits } from "./SearchSheet";
 
 const rowLabel = "font-mono text-[10.5px] uppercase tracking-[.14em] text-dark-muted";
 const rowValue = "text-base font-semibold text-bone [overflow-wrap:anywhere]";
@@ -90,7 +92,9 @@ export function MenuPanel() {
         {/* Numbered main menu + WhatsApp (phones, portrait or landscape) */}
         <div className="hidden flex-1 flex-col phone:flex">
           <div className="font-mono text-[11px] tracking-[.16em] text-brass uppercase">{t.menu.menu}</div>
-          <nav className="mt-[clamp(34px,7vh,72px)] flex flex-col">
+          {/* Mobile portrait: search lives here instead of the header. */}
+          <MenuSearch isOpen={isOpen} onPick={close} />
+          <nav className="mt-[clamp(34px,7vh,72px)] flex flex-col mp:mt-[clamp(20px,3.5vh,36px)]">
             {menuLinks.map((m) => (
               <Link key={m.href} href={m.href} onClick={close} className="grid grid-cols-[44px_1fr] items-baseline border-b border-bone/12 py-3.5 text-bone hover:text-brass">
                 <span className="font-numeral text-sm text-brass">{m.num}</span>
@@ -123,6 +127,55 @@ export function MenuPanel() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+/** Inline product search for the phone menu (mobile portrait only). Cleared each time the menu closes. */
+function MenuSearch({ isOpen, onPick }: { isOpen: boolean; onPick: () => void }) {
+  const t = useT();
+  const [q, setQ] = useState("");
+  const term = q.trim();
+  const hits = useSearchHits(term);
+
+  useEffect(() => {
+    if (!isOpen) setQ("");
+  }, [isOpen]);
+
+  return (
+    <div className="mt-[clamp(28px,5vh,48px)] hidden mp:block" role="search">
+      <label className="flex items-center gap-3 border-b-[1.5px] border-bone/40 focus-within:border-brass">
+        <SearchIcon size={22} className="shrink-0 text-brass" />
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          type="search"
+          enterKeyHint="search"
+          placeholder={t.search.placeholder}
+          aria-label={t.search.placeholder}
+          className="min-h-12 min-w-0 flex-1 bg-transparent py-2.5 text-lg text-bone outline-none placeholder:text-dark-faint [&::-webkit-search-cancel-button]:hidden"
+        />
+        {q && (
+          <button type="button" onClick={() => setQ("")} aria-label={t.search.clear} className="-me-2.5 flex size-11 shrink-0 items-center justify-center text-dark-muted hover:text-bone">
+            <CloseIcon size={20} />
+          </button>
+        )}
+      </label>
+      {term && (
+        <ul className="divide-y divide-bone/12" aria-live="polite">
+          {hits.length === 0 && <li className="py-3 text-[15px] text-dark-muted">{t.search.noMatch}</li>}
+          {hits.map((p) => (
+            <li key={p.id}>
+              <Link href={`/range#${p.id}`} onClick={onPick} className="flex min-h-11 items-baseline justify-between gap-4 py-3 text-bone hover:text-brass">
+                <span className="text-base font-bold">{t.products[p.id].name}</span>
+                <span className="font-mono text-xs whitespace-nowrap text-dark-muted">
+                  {ugx(p.p500)} / {t.common.sizes["500g"]}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

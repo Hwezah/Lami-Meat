@@ -85,6 +85,7 @@ export const en = {
   search: {
     placeholder: "Search the range…",
     close: "Close search",
+    clear: "Clear search",
     popular: "Popular",
     popularItems: ["Smoked sausages", "Beef hot dogs", "Minced beef"],
     noMatch: "No match. Try “sausages” or “mince”.",
