@@ -71,7 +71,7 @@ export function MenuPanel() {
               </div>
             ))}
           </div>
-          <a href={wa(t.wa.default)} target="_blank" rel="noopener" className="mt-7 flex min-h-[52px] items-center justify-center gap-2.5 rounded-lm bg-whatsapp px-[22px] py-[15px] text-sm font-extrabold tracking-[.06em] whitespace-nowrap text-white uppercase hover:bg-whatsapp-hover">
+          <a href={wa(t.wa.default)} target="_blank" rel="noopener" className="mt-7 flex min-h-[52px] items-center justify-center gap-2.5 rounded-lm bg-whatsapp px-[22px] py-[15px] text-[15px] font-extrabold tracking-[.01em] whitespace-nowrap text-white hover:bg-whatsapp-hover">
             <WhatsAppIcon />
             {t.menu.enquire}
           </a>
@@ -115,7 +115,7 @@ export function MenuPanel() {
               href={wa(t.wa.default)}
               target="_blank"
               rel="noopener"
-              className="flex min-h-[52px] items-center justify-center gap-2.5 rounded-lm bg-whatsapp px-[22px] py-[15px] text-sm font-extrabold tracking-[.06em] whitespace-nowrap text-white uppercase hover:bg-whatsapp-hover"
+              className="flex min-h-[52px] items-center justify-center gap-2.5 rounded-lm bg-whatsapp px-[22px] py-[15px] text-[15px] font-extrabold tracking-[.01em] whitespace-nowrap text-white hover:bg-whatsapp-hover"
             >
               <WhatsAppIcon />
               {t.menu.enquire}
