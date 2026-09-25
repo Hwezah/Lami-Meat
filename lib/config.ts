@@ -24,6 +24,12 @@ export const site = {
   instagramHandle: "@lamimeat",
   hours: "Mon–Sat · 8am–6pm",
   location: "Kampala, Uganda",
+  /** Parent company. The URL is a Vercel preview deployment; swap for the production domain when live. */
+  parent: {
+    name: "COMAFRO General Trading Ltd",
+    shortName: "COMAFRO",
+    url: env(process.env.NEXT_PUBLIC_PARENT_URL, "https://comafro-r9o7fyose-hwezahs-projects.vercel.app/ar"),
+  },
 } as const;
 
 export const telHref = `tel:+${site.whatsapp}`;

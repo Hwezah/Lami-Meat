@@ -36,6 +36,7 @@ const jsonLd = {
   email: site.email,
   address: { "@type": "PostalAddress", addressLocality: "Kampala", addressCountry: "UG" },
   openingHours: "Mo-Sa 08:00-18:00",
+  parentOrganization: { "@type": "Organization", name: site.parent.name, url: site.parent.url },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

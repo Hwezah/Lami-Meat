@@ -34,6 +34,7 @@ export function MenuPanel() {
     ["Kitchen", <span key="k" className={rowValue}>{site.location}</span>],
     ["Delivery", <span key="d" className={rowValue}>Across Kampala, kept cold</span>],
     ["Instagram", <a key="i" href={site.instagram} target="_blank" rel="noopener" className={`${rowValue} hover:text-brass`}>{site.instagramHandle}</a>],
+    ["Parent co.", <a key="p" href={site.parent.url} target="_blank" rel="noopener" className={`${rowValue} hover:text-brass`}>{site.parent.name}</a>],
   ];
 
   return (

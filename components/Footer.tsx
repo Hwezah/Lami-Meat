@@ -17,6 +17,13 @@ export function Footer() {
               <Logo variant="footer" />
             </div>
             <p className="m-0 max-w-[320px] text-[14.5px] leading-[1.6] text-dark-muted">Smokehouse and butchery in Kampala, Uganda. Crafted for the finest taste.</p>
+            <p className="m-0 mt-3 max-w-[320px] text-[14.5px] leading-[1.6] text-dark-muted">
+              A{" "}
+              <a href={site.parent.url} target="_blank" rel="noopener" className="text-bone underline decoration-brass/60 underline-offset-4 hover:text-brass">
+                {site.parent.name}
+              </a>{" "}
+              company.
+            </p>
           </div>
           <div>
             <div className={colHead}>Explore</div>
