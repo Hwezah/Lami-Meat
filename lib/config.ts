@@ -28,7 +28,7 @@ export const site = {
   parent: {
     name: "COMAFRO General Trading Ltd",
     shortName: "COMAFRO",
-    url: env(process.env.NEXT_PUBLIC_PARENT_URL, "https://comafro-r9o7fyose-hwezahs-projects.vercel.app/ar"),
+    url: env(process.env.NEXT_PUBLIC_PARENT_URL, "https://comafro-r9o7fyose-hwezahs-projects.vercel.app/en"),
   },
 } as const;
 
