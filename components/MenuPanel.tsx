@@ -48,7 +48,7 @@ export function MenuPanel() {
         role="dialog"
         aria-modal="true"
         aria-label={t.menu.dialog}
-        className={`absolute top-0 end-0 bottom-0 flex w-[min(500px,100%)] flex-col overflow-y-auto bg-charcoal-2 p-[clamp(28px,4vw,52px)] transition-transform ease-lm phone:p-5 ${isOpen ? "translate-x-0 duration-[520ms]" : "translate-x-full duration-300 rtl:-translate-x-full"}`}
+        className={`absolute top-0 end-0 bottom-0 flex w-[min(500px,100%)] flex-col overflow-y-auto phone:bottom-auto phone:h-screen phone:h-dvh bg-charcoal-2 p-[clamp(28px,4vw,52px)] transition-transform ease-lm phone:p-5 ${isOpen ? "translate-x-0 duration-[520ms]" : "translate-x-full duration-300 rtl:-translate-x-full"}`}
       >
         <button onClick={close} aria-label={t.menu.close} className="absolute top-[18px] end-[18px] flex size-[52px] items-center justify-center text-bone">
           <CloseIcon size={36} />
@@ -87,7 +87,7 @@ export function MenuPanel() {
           </div>
         </div>
 
-        {/* Numbered main menu (mobile portrait only) */}
+        {/* Numbered main menu + WhatsApp (phones, portrait or landscape) */}
         <div className="hidden flex-1 flex-col phone:flex">
           <div className="font-mono text-[11px] tracking-[.16em] text-brass uppercase">{t.menu.menu}</div>
           <nav className="mt-[clamp(34px,7vh,72px)] flex flex-col">
@@ -108,6 +108,18 @@ export function MenuPanel() {
             <span>
               <span dir="ltr">{site.phoneDisplay}</span> · {site.email}
             </span>
+          </div>
+          {/* Pinned to the bottom of the panel, so it stays reachable when the list scrolls on short screens. */}
+          <div className="sticky bottom-[-20px] -mb-5 bg-charcoal-2 pt-5 pb-5">
+            <a
+              href={wa(t.wa.default)}
+              target="_blank"
+              rel="noopener"
+              className="flex min-h-[52px] items-center justify-center gap-2.5 rounded-lm bg-whatsapp px-[22px] py-[15px] text-sm font-extrabold tracking-[.06em] whitespace-nowrap text-white uppercase hover:bg-whatsapp-hover"
+            >
+              <WhatsAppIcon />
+              {t.common.whatsapp} <span dir="ltr">{site.phoneDisplay}</span>
+            </a>
           </div>
         </div>
       </div>
