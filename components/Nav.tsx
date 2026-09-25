@@ -42,7 +42,6 @@ export function Nav() {
       </Link>
 
       <div className="flex min-w-0 flex-1 items-center justify-end gap-[clamp(6px,1.1vw,14px)]">
-        <LanguageSwitcher className="me-1 max-sm:me-0" />
         <button onClick={() => open("search")} aria-label={t.nav.search} className={iconBtn}>
           <SearchIcon />
         </button>
@@ -56,7 +55,8 @@ export function Nav() {
             <span className="absolute -top-px -end-[3px] h-[18px] min-w-[18px] rounded-[9px] bg-brass px-[5px] text-center font-mono text-[11px] leading-[18px] font-bold text-charcoal">{count}</span>
           )}
         </Link>
-        <a href={wa(t.wa.default)} target="_blank" rel="noopener" className="ms-1 inline-flex items-center rounded-lm border border-brass px-[18px] py-[11px] text-[13px] font-bold tracking-[.08em] text-brass uppercase hover:bg-brass hover:text-charcoal max-md:hidden">
+        <LanguageSwitcher className="ms-1" />
+        <a href={wa(t.wa.default)} target="_blank" rel="noopener" className="inline-flex items-center rounded-lm border border-brass px-[18px] py-[11px] text-[13px] font-bold tracking-[.08em] text-brass uppercase hover:bg-brass hover:text-charcoal max-md:hidden">
           {t.nav.order}
         </a>
         <button onClick={() => open("menu")} aria-label={t.nav.menu} className="flex h-11 w-[52px] shrink-0 items-center justify-center text-bone hover:text-brass mp:w-11">
