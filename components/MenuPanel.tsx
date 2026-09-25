@@ -118,7 +118,7 @@ export function MenuPanel() {
               className="flex min-h-[52px] items-center justify-center gap-2.5 rounded-lm bg-whatsapp px-[22px] py-[15px] text-sm font-extrabold tracking-[.06em] whitespace-nowrap text-white uppercase hover:bg-whatsapp-hover"
             >
               <WhatsAppIcon />
-              {t.common.whatsapp} <span dir="ltr">{site.phoneDisplay}</span>
+              {t.menu.enquire}
             </a>
           </div>
         </div>

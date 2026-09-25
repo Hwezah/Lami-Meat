@@ -79,6 +79,7 @@ export const en = {
     menu: "Menu",
     close: "Close menu",
     dialog: "Menu",
+    enquire: "Enquire on WhatsApp",
   },
 
   search: {

@@ -80,6 +80,7 @@ export const ar: Dict = {
     menu: "القائمة",
     close: "إغلاق القائمة",
     dialog: "القائمة",
+    enquire: "استفسر عبر واتساب",
   },
 
   search: {
