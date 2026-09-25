@@ -1,36 +1,19 @@
+import Image from "next/image";
+
 /**
- * LAMI MEAT lockup: red speech-bubble badge with a bold upright "Lami" + stacked wordmark (LAMI in red, MEAT in cream).
- * Inline SVG (crisp at any size, uses the page's fonts). `size` is the badge height in px.
- * If the client supplies a final vector logo, swap it in here.
+ * LAMI MEAT lockup: the client's Lami badge (heart + red plaque, "Crafted for the Finest Taste")
+ * on its white disc + stacked wordmark (LAMI in red, MEAT in cream).
+ * The badge is cut from the logo the client sent (public/brand/lami-badge.png). Swap in a vector when they supply one.
  */
-export function LogoMark({ size = 46, className = "" }: { size?: number; className?: string }) {
-  return (
-    <svg width={(size * 48) / 50} height={size} viewBox="0 0 48 50" className={className} aria-hidden>
-      {/* bubble + pointer */}
-      <path d="M24 2C11.3 2 1.5 10.3 1.5 20.5c0 8.9 7.4 16.3 17.3 18.1L24 49l5.2-10.4C39.1 36.8 46.5 29.4 46.5 20.5 46.5 10.3 36.7 2 24 2Z" fill="#D82828" />
-      {/* inner hairline oval */}
-      <ellipse cx="24" cy="20.5" rx="18.6" ry="14.2" fill="none" stroke="#EFE9DF" strokeWidth="0.9" opacity="0.9" />
-      <text
-        x="24"
-        y="25.2"
-        textAnchor="middle"
-        fill="#EFE9DF"
-        fontSize="14"
-        fontWeight="700"
-        letterSpacing="-0.2"
-        style={{ fontFamily: "var(--font-hanken), 'Helvetica Neue', Arial, sans-serif" }}
-      >
-        Lami
-      </text>
-    </svg>
-  );
+export function LogoMark({ size = 46, className = "", priority = false }: { size?: number; className?: string; priority?: boolean }) {
+  return <Image src="/brand/lami-badge.png" alt="" width={size} height={size} priority={priority} className={`rounded-full ${className}`} />;
 }
 
 export function Logo({ variant = "nav", className = "" }: { variant?: "nav" | "footer"; className?: string }) {
   const nav = variant === "nav";
   return (
     <span dir="ltr" className={`inline-flex items-center ${nav ? "gap-2.5 max-lg:gap-2" : "gap-3.5"} ${className}`} role="img" aria-label="LAMI MEAT">
-      <LogoMark size={nav ? 46 : 72} className={nav ? "max-lg:h-10 max-lg:w-auto" : ""} />
+      <LogoMark size={nav ? 46 : 72} priority={nav} className={nav ? "max-lg:size-10" : ""} />
       <span
         aria-hidden
         className={`flex flex-col font-[family-name:var(--font-hanken)] font-black tracking-[-0.01em] text-bone uppercase ${nav ? "text-[17px] leading-[.95] max-lg:text-[15px]" : "text-[26px] leading-[.95]"}`}
