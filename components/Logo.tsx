@@ -44,11 +44,11 @@ export function LogoMark({ height = 58, className = "" }: { height?: number; cla
 export function Logo({ variant = "nav", className = "" }: { variant?: "nav" | "footer"; className?: string }) {
   const nav = variant === "nav";
   return (
-    <span dir="ltr" className={`inline-flex items-center ${nav ? "gap-2 max-lg:gap-1.5 mp:gap-1" : "gap-2.5"} ${className}`} role="img" aria-label="LAMI MEAT">
-      <LogoMark height={nav ? 58 : 96} className={nav ? "max-lg:h-[50px] max-lg:w-[78px] phone:h-[46px] phone:w-[72px]" : ""} />
+    <span dir="ltr" className={`inline-flex items-center ${nav ? "gap-2 max-lg:gap-1.5 mp:gap-1" : "gap-2"} ${className}`} role="img" aria-label="LAMI MEAT">
+      <LogoMark height={nav ? 58 : 68} className={nav ? "max-lg:h-[50px] max-lg:w-[78px] phone:h-[46px] phone:w-[72px]" : ""} />
       <span
         aria-hidden
-        className={`flex flex-col font-[family-name:var(--font-hanken)] font-black tracking-[-0.01em] text-bone uppercase ${nav ? "text-[20px] leading-[.95] max-lg:text-[17px]" : "text-[30px] leading-[.95]"}`}
+        className={`flex flex-col font-[family-name:var(--font-hanken)] font-black tracking-[-0.01em] text-bone uppercase ${nav ? "text-[20px] leading-[.95] max-lg:text-[17px]" : "text-[24px] leading-[.95]"}`}
       >
         <span className="text-lami-red">Lami</span>
         <span>Meat</span>
