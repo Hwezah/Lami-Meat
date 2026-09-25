@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Cairo, Hanken_Grotesk, IBM_Plex_Sans_Arabic, Libre_Baskerville, Space_Mono } from "next/font/google";
+import { Anton, Cairo, Hanken_Grotesk, IBM_Plex_Sans_Arabic, Space_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { AuthModal } from "@/components/AuthModal";
 import { Footer } from "@/components/Footer";
@@ -18,7 +18,6 @@ import "../globals.css";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700", "800", "900"], style: ["normal", "italic"], variable: "--font-hanken" });
 const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-space-mono" });
-const logoSerif = Libre_Baskerville({ subsets: ["latin"], weight: "400", style: "italic", variable: "--font-logo-serif" });
 const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton" });
 // Arabic faces: only applied on /ar (see globals.css), so they aren't preloaded on English pages.
 const plexArabic = IBM_Plex_Sans_Arabic({ subsets: ["arabic"], weight: ["300", "400", "500", "600", "700"], variable: "--font-plex-arabic", preload: false });
@@ -63,7 +62,7 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
     <html
       lang={locale}
       dir={dirOf(locale)}
-      className={`${hanken.variable} ${spaceMono.variable} ${anton.variable} ${logoSerif.variable} ${plexArabic.variable} ${cairo.variable}`}
+      className={`${hanken.variable} ${spaceMono.variable} ${anton.variable} ${plexArabic.variable} ${cairo.variable}`}
     >
       <body>
         <I18nProvider locale={locale}>

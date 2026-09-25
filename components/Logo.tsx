@@ -1,5 +1,5 @@
 /**
- * LAMI MEAT lockup: red speech-bubble badge with an italic "Lami" + stacked LAMI / MEAT wordmark.
+ * LAMI MEAT lockup: red speech-bubble badge with a bold upright "Lami" + stacked wordmark (LAMI in red, MEAT in cream).
  * Inline SVG (crisp at any size, uses the page's fonts). `size` is the badge height in px.
  * If the client supplies a final vector logo, swap it in here.
  */
@@ -15,9 +15,10 @@ export function LogoMark({ size = 46, className = "" }: { size?: number; classNa
         y="25.2"
         textAnchor="middle"
         fill="#EFE9DF"
-        fontSize="13.5"
-        fontStyle="italic"
-        style={{ fontFamily: "var(--font-logo-serif), Georgia, 'Times New Roman', serif" }}
+        fontSize="14"
+        fontWeight="700"
+        letterSpacing="-0.2"
+        style={{ fontFamily: "var(--font-hanken), 'Helvetica Neue', Arial, sans-serif" }}
       >
         Lami
       </text>
@@ -34,7 +35,7 @@ export function Logo({ variant = "nav", className = "" }: { variant?: "nav" | "f
         aria-hidden
         className={`flex flex-col font-[family-name:var(--font-hanken)] font-black tracking-[-0.01em] text-bone uppercase ${nav ? "text-[17px] leading-[.95] max-lg:text-[15px]" : "text-[26px] leading-[.95]"}`}
       >
-        <span>Lami</span>
+        <span className="text-lami-red">Lami</span>
         <span>Meat</span>
       </span>
     </span>
