@@ -23,10 +23,10 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
       }}
       className={`relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-lm border border-bone/25 px-3 text-bone after:absolute after:-inset-1.5 after:content-[''] phone:min-h-8 phone:min-w-8 phone:px-1.5 transition-colors hover:border-brass hover:text-brass ${className}`}
     >
-      <span className={`max-[1180px]:hidden ${other === "ar" ? "font-[family-name:var(--font-plex-arabic)] text-[15px] font-semibold" : "font-[family-name:var(--font-hanken)] text-[12.5px] font-bold tracking-[.1em] uppercase"}`}>
+      <span className={`inline-block leading-none max-[1180px]:hidden ${other === "ar" ? "-translate-y-[0.05em] font-[family-name:var(--font-plex-arabic)] text-[15px] font-semibold" : "translate-y-[0.07em] font-[family-name:var(--font-hanken)] text-[12.5px] font-bold tracking-[.1em] uppercase"}`}>
         {t.nav.switchTo}
       </span>
-      <span className={`hidden max-[1180px]:inline ${other === "ar" ? "font-[family-name:var(--font-plex-arabic)] text-base font-semibold" : "font-[family-name:var(--font-hanken)] text-[12px] font-bold tracking-[.08em]"}`}>
+      <span className={`hidden leading-none max-[1180px]:inline-block ${other === "ar" ? "-translate-y-[0.17em] font-[family-name:var(--font-plex-arabic)] text-base font-semibold" : "font-[family-name:var(--font-hanken)] text-[12px] font-bold tracking-[.08em]"}`}>
         {t.nav.switchToShort}
       </span>
     </Link>
