@@ -16,7 +16,7 @@ const rowValue = "text-base font-semibold text-bone [overflow-wrap:anywhere]";
 /**
  * Slide-in side panel (from the inline end: right in English, left in Arabic).
  * Desktop / tablet / landscape: contact details (+ "Pages" list at ≤920px).
- * Mobile portrait: numbered main menu 01–06 instead.
+ * Phones (portrait or landscape): numbered main menu 01–06 instead.
  */
 export function MenuPanel() {
   const isOpen = useUI((s) => s.overlay === "menu");
@@ -48,14 +48,14 @@ export function MenuPanel() {
         role="dialog"
         aria-modal="true"
         aria-label={t.menu.dialog}
-        className={`absolute top-0 end-0 bottom-0 flex w-[min(500px,100%)] flex-col overflow-y-auto bg-charcoal-2 p-[clamp(28px,4vw,52px)] transition-transform ease-lm mp:p-5 ${isOpen ? "translate-x-0 duration-[520ms]" : "translate-x-full duration-300 rtl:-translate-x-full"}`}
+        className={`absolute top-0 end-0 bottom-0 flex w-[min(500px,100%)] flex-col overflow-y-auto bg-charcoal-2 p-[clamp(28px,4vw,52px)] transition-transform ease-lm phone:p-5 ${isOpen ? "translate-x-0 duration-[520ms]" : "translate-x-full duration-300 rtl:-translate-x-full"}`}
       >
         <button onClick={close} aria-label={t.menu.close} className="absolute top-[18px] end-[18px] flex size-[52px] items-center justify-center text-bone">
           <CloseIcon size={36} />
         </button>
 
         {/* Contact view (hidden on mobile portrait) */}
-        <div className="flex min-h-0 flex-1 flex-col mp:hidden">
+        <div className="flex min-h-0 flex-1 flex-col phone:hidden">
           <div className="font-mono text-[11px] tracking-[.16em] text-brass uppercase">{t.menu.getInTouch}</div>
           <h2 className="mt-[clamp(28px,5vh,52px)] font-display text-[clamp(36px,3.6vw,52px)] leading-[.9] font-black tracking-[-0.04em] text-bone uppercase">
             {t.menu.title1}
@@ -88,7 +88,7 @@ export function MenuPanel() {
         </div>
 
         {/* Numbered main menu (mobile portrait only) */}
-        <div className="hidden flex-1 flex-col mp:flex">
+        <div className="hidden flex-1 flex-col phone:flex">
           <div className="font-mono text-[11px] tracking-[.16em] text-brass uppercase">{t.menu.menu}</div>
           <nav className="mt-[clamp(34px,7vh,72px)] flex flex-col">
             {menuLinks.map((m) => (

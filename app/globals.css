@@ -7,6 +7,16 @@
   Mobile portrait = `mp:` → (max-width:600px) and (orientation:portrait).
 */
 @custom-variant mp (@media (max-width: 600px) and (orientation: portrait));
+/* Phone in either orientation: portrait ≤600px wide, or landscape with a short screen (≤500px tall).
+   Used for the phone menu (numbered list + three-line button) so landscape phones get it too. */
+@custom-variant phone {
+  @media (max-width: 600px) and (orientation: portrait) {
+    @slot;
+  }
+  @media (orientation: landscape) and (max-height: 500px) {
+    @slot;
+  }
+}
 
 @theme {
   --breakpoint-xs: 480px;

@@ -59,11 +59,11 @@ export function Nav() {
         <a href={wa(t.wa.default)} target="_blank" rel="noopener" className="inline-flex items-center rounded-lm border border-brass px-[18px] py-[11px] text-[13px] font-bold tracking-[.08em] text-brass uppercase hover:bg-brass hover:text-charcoal max-md:hidden">
           {t.nav.order}
         </a>
-        <button onClick={() => open("menu")} aria-label={t.nav.menu} className="flex h-11 w-[52px] shrink-0 items-center justify-center text-bone hover:text-brass mp:w-11">
-          <span className="mp:hidden">
+        <button onClick={() => open("menu")} aria-label={t.nav.menu} className="flex h-11 w-[52px] shrink-0 items-center justify-center text-bone hover:text-brass phone:w-11">
+          <span className="phone:hidden">
             <MenuStripes />
           </span>
-          <span className="hidden mp:block">
+          <span className="hidden phone:block">
             <MenuThree />
           </span>
         </button>

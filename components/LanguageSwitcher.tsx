@@ -21,7 +21,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
       onClick={() => {
         document.cookie = `${LOCALE_COOKIE}=${other}; path=/; max-age=31536000; samesite=lax`;
       }}
-      className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-lm border border-bone/25 px-3 text-bone transition-colors hover:border-brass hover:text-brass ${className}`}
+      className={`relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-lm border border-bone/25 px-3 text-bone after:absolute after:-inset-1.5 after:content-[''] phone:min-h-8 phone:min-w-8 phone:px-1.5 transition-colors hover:border-brass hover:text-brass ${className}`}
     >
       <span className={`max-[1180px]:hidden ${other === "ar" ? "font-[family-name:var(--font-plex-arabic)] text-[15px] font-semibold" : "font-[family-name:var(--font-hanken)] text-[12.5px] font-bold tracking-[.1em] uppercase"}`}>
         {t.nav.switchTo}
