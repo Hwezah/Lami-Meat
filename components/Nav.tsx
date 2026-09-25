@@ -14,7 +14,8 @@ import { AccountIcon, CartIcon, MenuStripes, MenuThree, SearchIcon } from "./Ico
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Logo } from "./Logo";
 
-const iconBtn = "flex p-1.5 text-bone hover:text-brass [&>svg]:mp:size-6";
+// On mobile portrait the buttons shrink to 32px to tighten the row; the ::after keeps the tap area ≥ 44px tall.
+const iconBtn = "relative flex p-1.5 text-bone hover:text-brass [&>svg]:mp:size-6 mp:p-1 mp:after:absolute mp:after:-inset-x-1 mp:after:-inset-y-1.5 mp:after:content-['']";
 
 export function Nav() {
   const pathname = stripLocale(usePathname() || "/");
@@ -41,25 +42,25 @@ export function Nav() {
         <Logo />
       </Link>
 
-      <div className="flex min-w-0 flex-1 items-center justify-end gap-[clamp(6px,1.1vw,14px)]">
+      <div className="flex min-w-0 flex-1 items-center justify-end gap-[clamp(6px,1.1vw,14px)] mp:gap-0.5">
         <button onClick={() => open("search")} aria-label={t.nav.search} className={iconBtn}>
           <SearchIcon />
         </button>
-        <button onClick={() => openAuth(session ? "signout" : "login")} aria-label={t.nav.account} className={`relative ${iconBtn}`}>
+        <button onClick={() => openAuth(session ? "signout" : "login")} aria-label={t.nav.account} className={iconBtn}>
           <AccountIcon />
           {hydrated && session && <span className="pointer-events-none absolute top-0.5 end-0 size-[9px] rounded-full bg-online shadow-[0_0_0_2px_rgba(40,12,9,.35)]" />}
         </button>
-        <Link href="/cart" aria-label={t.nav.cart} className={`relative ${iconBtn}`}>
+        <Link href="/cart" aria-label={t.nav.cart} className={iconBtn}>
           <CartIcon />
           {hydrated && count > 0 && (
             <span className="absolute -top-px -end-[3px] h-[18px] min-w-[18px] rounded-[9px] bg-brass px-[5px] text-center font-mono text-[11px] leading-[18px] font-bold text-charcoal">{count}</span>
           )}
         </Link>
-        <LanguageSwitcher className="ms-1" />
+        <LanguageSwitcher className="ms-1 mp:ms-1.5" />
         <a href={wa(t.wa.default)} target="_blank" rel="noopener" className="inline-flex items-center rounded-lm border border-brass px-[18px] py-[11px] text-[13px] font-bold tracking-[.08em] text-brass uppercase hover:bg-brass hover:text-charcoal max-md:hidden">
           {t.nav.order}
         </a>
-        <button onClick={() => open("menu")} aria-label={t.nav.menu} className="flex h-11 w-[52px] shrink-0 items-center justify-center text-bone hover:text-brass phone:w-11">
+        <button onClick={() => open("menu")} aria-label={t.nav.menu} className="flex h-11 w-[52px] shrink-0 items-center justify-center text-bone hover:text-brass phone:w-11 mp:relative mp:-me-1 mp:w-8 mp:after:absolute mp:after:-inset-x-1.5 mp:after:content-['']">
           <span className="phone:hidden">
             <MenuStripes />
           </span>
