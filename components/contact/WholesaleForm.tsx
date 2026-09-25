@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { chip, cta, field, fieldLabel } from "@/components/ui";
-import { volumes } from "@/data/faq";
+import { useT } from "@/lib/i18n/provider";
 import { products } from "@/lib/products";
 import { wa } from "@/lib/whatsapp";
 
 export function WholesaleForm() {
+  const t = useT();
+  const W = t.contact.w;
   const [biz, setBiz] = useState("");
   const [contact, setContact] = useState("");
   const [vol, setVol] = useState("");
@@ -14,43 +16,41 @@ export function WholesaleForm() {
   const [err, setErr] = useState("");
 
   const send = () => {
-    if (!biz.trim() || !contact.trim()) return setErr("Please add your business name and a contact.");
-    window.open(
-      wa(`Hi LAMI MEAT! Wholesale enquiry:\nBusiness: ${biz}\nContact: ${contact}\nVolume: ${vol || "Not sure yet"}\nProducts: ${prods.join(", ") || "Full range"}`),
-      "_blank",
-      "noopener",
-    );
+    if (!biz.trim() || !contact.trim()) return setErr(W.error);
+    const volLabel = t.contact.volumes.find((v) => v.value === vol)?.label ?? "";
+    // Product names stay in English so the team can read them.
+    window.open(wa(t.wa.wholesale({ biz, contact, vol: volLabel, prods: prods.join(", ") })), "_blank", "noopener");
   };
   const toggle = (n: string) => setProds((p) => (p.includes(n) ? p.filter((x) => x !== n) : [...p, n]));
 
   return (
-    <form data-reveal data-form onSubmit={(e) => (e.preventDefault(), send())} noValidate className="text-left">
+    <form data-reveal data-form onSubmit={(e) => (e.preventDefault(), send())} noValidate className="text-start">
       <div className="grid grid-cols-2 gap-x-[26px] gap-y-[22px] max-sm:grid-cols-1">
         <label>
-          <span className={fieldLabel("bone")}>Business</span>
-          <input className={field("bone")} type="text" autoComplete="organization" value={biz} onChange={(e) => (setBiz(e.target.value), setErr(""))} placeholder="Business name" />
+          <span className={fieldLabel("bone")}>{W.biz}</span>
+          <input className={field("bone")} type="text" autoComplete="organization" value={biz} onChange={(e) => (setBiz(e.target.value), setErr(""))} placeholder={W.bizPh} />
         </label>
         <label>
-          <span className={fieldLabel("bone")}>Contact</span>
-          <input className={field("bone")} type="text" value={contact} onChange={(e) => (setContact(e.target.value), setErr(""))} placeholder="Name & phone" />
+          <span className={fieldLabel("bone")}>{W.contact}</span>
+          <input className={field("bone")} type="text" value={contact} onChange={(e) => (setContact(e.target.value), setErr(""))} placeholder={W.contactPh} />
         </label>
       </div>
       <fieldset className="mt-[30px]">
-        <legend className={`${fieldLabel("bone")} mb-3`}>Weekly volume</legend>
+        <legend className={`${fieldLabel("bone")} mb-3`}>{W.volume}</legend>
         <div className="flex flex-wrap gap-2">
-          {volumes.map((v) => (
-            <button key={v} type="button" aria-pressed={vol === v} onClick={() => (setVol(v), setErr(""))} className={chip(vol === v)}>
-              {v}
+          {t.contact.volumes.map((v) => (
+            <button key={v.value} type="button" aria-pressed={vol === v.value} onClick={() => (setVol(v.value), setErr(""))} className={chip(vol === v.value)}>
+              {v.label}
             </button>
           ))}
         </div>
       </fieldset>
       <fieldset className="mt-[26px]">
-        <legend className={`${fieldLabel("bone")} mb-3`}>Products</legend>
+        <legend className={`${fieldLabel("bone")} mb-3`}>{W.products}</legend>
         <div className="flex flex-wrap gap-2">
           {products.map((p) => (
             <button key={p.id} type="button" aria-pressed={prods.includes(p.name)} onClick={() => toggle(p.name)} className={chip(prods.includes(p.name))}>
-              {p.name}
+              {t.products[p.id].name}
             </button>
           ))}
         </div>
@@ -58,7 +58,7 @@ export function WholesaleForm() {
       {err && <p className="mt-4 text-sm text-error-bone">{err}</p>}
       <div data-cta-actions className="mt-[30px] flex">
         <button type="submit" className={cta.ink}>
-          Send enquiry →
+          {W.send}
         </button>
       </div>
     </form>

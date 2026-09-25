@@ -11,8 +11,8 @@ export function FramedPhoto({ src, alt, aspect = "aspect-[4/5]", offset = 18, li
   priority?: boolean;
 }) {
   return (
-    <div className={`relative ${offset === 16 ? "mr-4" : "mr-[18px]"}`}>
-      <div aria-hidden className={`absolute border ${line} ${offset === 16 ? "inset-[16px_-16px_-16px_16px]" : "inset-[18px_-18px_-18px_18px]"}`} />
+    <div className={`relative ${offset === 16 ? "me-4" : "me-[18px]"}`}>
+      <div aria-hidden className={`absolute border ${line} ${offset === 16 ? "inset-[16px_-16px_-16px_16px] rtl:inset-[16px_16px_-16px_-16px]" : "inset-[18px_-18px_-18px_18px] rtl:inset-[18px_18px_-18px_-18px]"}`} />
       <div className={`relative w-full overflow-hidden bg-bone-2 ${aspect}`}>
         <Photo src={src} alt={alt} sizes={sizes} priority={priority} />
       </div>

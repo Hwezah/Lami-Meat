@@ -20,16 +20,21 @@ npm run lint && npm run typecheck && npm run build
 
 ## Structure
 ```
-app/            routes: / · /range · /our-story · /contact · /cart · /recipes · /careers · /account
+app/[locale]/   routes (per language): / · /range · /our-story · /contact · /cart · /recipes · /careers · /account
                 + robots.ts, sitemap.ts, LocalBusiness JSON-LD in layout.tsx
 components/     chrome (TopBar, Nav, MenuPanel, SearchSheet, Toast, Footer, AuthModal)
                 + shared UI (Button, Eyebrow, PageHeader, Fold, QtyStepper, Photo, RangeRow, RotatingWord, Ticker, Reveal)
-lib/            config, whatsapp (wa.me builder), format (UGX), cart store, session stub, ui store
+lib/            config, whatsapp (wa.me builder), format (UGX), cart store, session stub, ui store, i18n/ (dictionaries)
 data/           products.json (canonical), nav, home copy, tips, roles
 design/         the 8 .dc.html design references (open with `npx serve design`) — reference only, not shipped
 docs/           HANDOFF.md (build spec), WIRING.md (behaviour; wins over HANDOFF), COMMAND-LOG.md
 public/         images/ (client photos), brand/ (logos), fonts/
 ```
+
+## Languages
+English and Arabic, at `/en/...` and `/ar/...`, with a switcher in the header (it keeps the page and remembers the choice).
+Copy lives in `lib/i18n/en.ts` and `lib/i18n/ar.ts`; Arabic pages render right-to-left with IBM Plex Sans Arabic and Cairo.
+See `CLAUDE.md` → Languages for the rules.
 
 ## Responsive contract
 Breakpoints are **max-width** in the design → use Tailwind `max-*` variants:

@@ -1,16 +1,12 @@
-import type { Metadata } from "next";
 import { AccountEyebrow, AccountPanel } from "@/components/account/AccountPanel";
 import { FramedPhoto } from "@/components/FramedPhoto";
 import { Ticker } from "@/components/Ticker";
-import { tickers } from "@/data/tickers";
+import { getPageDict, pageMetadata, type LocaleParams } from "@/lib/i18n/server";
 
-export const metadata: Metadata = {
-  title: "Account",
-  description: "Sign in or create a LAMI MEAT account to save your cart and reorder faster.",
-  robots: { index: false },
-};
+export const generateMetadata = (props: LocaleParams) => pageMetadata(props, "account", "/account", { robots: { index: false } });
 
-export default function AccountPage() {
+export default async function AccountPage(props: LocaleParams) {
+  const { t } = await getPageDict(props);
   return (
     <section className="px-[clamp(18px,4vw,46px)] pt-[clamp(56px,7vw,110px)] pb-[clamp(72px,9vw,128px)] max-xs:px-6 mp:px-3.5 mp:text-center">
       <div className="lm-stick lm-wrap grid grid-cols-2 items-center gap-[clamp(40px,6vw,110px)] max-lg:grid-cols-1">
@@ -19,9 +15,9 @@ export default function AccountPage() {
           <AccountPanel />
         </div>
         <figure data-reveal data-reveal-delay="120" className="m-0">
-          <FramedPhoto src="/images/team-line-3.jpg" alt="The LAMI packing room" />
+          <FramedPhoto src="/images/team-line-3.jpg" alt={t.account.photoAlt} />
           <div className="mt-11 border-t border-bone/16 pt-7 mp:text-center">
-            <Ticker lines={tickers.account} />
+            <Ticker lines={t.tickers.account} />
           </div>
         </figure>
       </div>

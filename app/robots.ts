@@ -2,5 +2,5 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/config";
 
 export default function robots(): MetadataRoute.Robots {
-  return { rules: { userAgent: "*", allow: "/", disallow: ["/cart", "/account"] }, sitemap: `${site.url}/sitemap.xml` };
+  return { rules: { userAgent: "*", allow: "/", disallow: ["/en/cart", "/ar/cart", "/en/account", "/ar/account"] }, sitemap: `${site.url}/sitemap.xml` };
 }

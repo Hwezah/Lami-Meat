@@ -244,3 +244,25 @@
     align-self: start;
   }
 }
+
+/* ───────────────────────── Arabic / RTL ─────────────────────────
+   The Latin faces have no Arabic glyphs: swap in IBM Plex Sans Arabic (body, labels)
+   and Cairo (display). Anton stays for numerals; the logo keeps its own fonts. */
+html[lang="ar"] {
+  --font-body: var(--font-plex-arabic), var(--font-hanken), system-ui, sans-serif;
+  --font-display: var(--font-cairo), var(--font-plex-arabic), sans-serif;
+  --font-mono: var(--font-plex-arabic), ui-monospace, monospace;
+}
+/* Letter-spacing breaks the joins between Arabic letters, so it is removed everywhere. */
+html[dir="rtl"] body *:not(svg, svg *) {
+  letter-spacing: 0 !important;
+}
+/* Arabic letters are taller than Latin caps: the tight display leading would clip them. */
+html[dir="rtl"] :is(h1, h2, h3) {
+  line-height: 1.22 !important;
+}
+/* The 10.5–12px mono labels and eyebrows are too small for Arabic script; lift them to 13px. */
+html[dir="rtl"] .lm-eyebrow,
+html[dir="rtl"] .font-mono:is(.text-\[10px\], .text-\[10\.5px\], .text-\[11px\], .text-\[11\.5px\], .text-xs) {
+  font-size: 13px;
+}

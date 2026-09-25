@@ -28,11 +28,11 @@ export function LogoMark({ size = 46, className = "" }: { size?: number; classNa
 export function Logo({ variant = "nav", className = "" }: { variant?: "nav" | "footer"; className?: string }) {
   const nav = variant === "nav";
   return (
-    <span className={`inline-flex items-center ${nav ? "gap-2.5 max-lg:gap-2" : "gap-3.5"} ${className}`} role="img" aria-label="LAMI MEAT">
+    <span dir="ltr" className={`inline-flex items-center ${nav ? "gap-2.5 max-lg:gap-2" : "gap-3.5"} ${className}`} role="img" aria-label="LAMI MEAT">
       <LogoMark size={nav ? 46 : 72} className={nav ? "max-lg:h-10 max-lg:w-auto" : ""} />
       <span
         aria-hidden
-        className={`flex flex-col font-display font-black tracking-[-0.01em] text-bone uppercase ${nav ? "text-[17px] leading-[.95] max-lg:text-[15px]" : "text-[26px] leading-[.95]"}`}
+        className={`flex flex-col font-[family-name:var(--font-hanken)] font-black tracking-[-0.01em] text-bone uppercase ${nav ? "text-[17px] leading-[.95] max-lg:text-[15px]" : "text-[26px] leading-[.95]"}`}
       >
         <span>Lami</span>
         <span>Meat</span>

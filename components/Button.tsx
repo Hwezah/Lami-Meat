@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { ComponentProps } from "react";
+import Link from "./LocaleLink";
 import { WhatsAppIcon } from "./Icons";
 
 type Variant = "primary" | "outline" | "outline-brass" | "whatsapp" | "ink";

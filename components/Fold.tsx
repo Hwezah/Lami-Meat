@@ -36,12 +36,12 @@ export function Fold({ id, open, onToggle, title, num, meta, tone = "bone", layo
   );
 
   return (
-    <div data-fold className={`border-b ${rule} text-left`}>
+    <div data-fold className={`border-b ${rule} text-start`}>
       <button
         type="button"
         onClick={() => onToggle(isOpen ? "" : id)}
         aria-expanded={isOpen}
-        className={`grid w-full items-center py-[clamp(18px,2vw,26px)] text-left font-display whitespace-normal ${dark ? "text-bone" : "text-ink"} ${
+        className={`grid w-full items-center py-[clamp(18px,2vw,26px)] text-start font-display whitespace-normal ${dark ? "text-bone" : "text-ink"} ${
           layout === "row"
             ? "grid-cols-[64px_minmax(0,1fr)_auto_44px] gap-x-[clamp(14px,2vw,28px)] gap-y-1.5 max-sm:grid-cols-[36px_minmax(0,1fr)_44px]"
             : "grid-cols-[minmax(0,1fr)_44px] gap-x-[clamp(14px,2vw,28px)] gap-y-4"
@@ -68,7 +68,7 @@ export function Fold({ id, open, onToggle, title, num, meta, tone = "bone", layo
           </>
         )}
       </button>
-      {isOpen && <div className={layout === "row" ? "pb-[clamp(26px,3vw,40px)] pl-[clamp(0px,5.6vw,92px)]" : "pt-1 pb-[clamp(28px,3vw,44px)]"}>{children}</div>}
+      {isOpen && <div className={layout === "row" ? "pb-[clamp(26px,3vw,40px)] ps-[clamp(0px,5.6vw,92px)]" : "pt-1 pb-[clamp(28px,3vw,44px)]"}>{children}</div>}
     </div>
   );
 }
