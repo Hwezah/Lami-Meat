@@ -73,7 +73,7 @@ export function MenuPanel() {
           </div>
           <a href={wa(t.wa.default)} target="_blank" rel="noopener" className="mt-7 flex min-h-[52px] items-center justify-center gap-2.5 rounded-lm bg-whatsapp px-[22px] py-[15px] text-sm font-extrabold tracking-[.06em] whitespace-nowrap text-white uppercase hover:bg-whatsapp-hover">
             <WhatsAppIcon />
-            {t.common.whatsapp} <span dir="ltr">{site.phoneDisplay}</span>
+            {t.menu.enquire}
           </a>
           <div className="mt-auto hidden pt-7 max-lg:block">
             <div className={`${rowLabel} mb-3`}>{t.menu.pages}</div>
